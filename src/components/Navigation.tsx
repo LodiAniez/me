@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Navigation: React.FC = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -12,6 +12,36 @@ const Navigation: React.FC = () => {
     { id: "testimonial", label: "Testimonial" },
     { id: "contact", label: "Contact" },
   ];
+
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-50% 0px -50% 0px",
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe all sections
+    navItems.forEach((item) => {
+      const section = document.getElementById(item.id);
+      if (section) {
+        observer.observe(section);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   const socialLinks = [
     {

@@ -1,6 +1,16 @@
 import React from "react";
+import resumePDF from "../assets/resume.pdf";
 
 const About: React.FC = () => {
+  const handleDownloadResume = () => {
+    const link = document.createElement("a");
+    link.href = resumePDF;
+    link.download = "Dexter_Louie_Aniez_Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const personalInfo = [
     { label: "Name", value: "Dexter Louie Aniez" },
     { label: "Email", value: "louieaniez@gmail.com" },
@@ -62,7 +72,10 @@ const About: React.FC = () => {
             </div>
 
             {/* Download CV Button */}
-            <button className="bg-cyan-400 hover:bg-cyan-500 text-gray-900 font-semibold px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105">
+            <button
+              onClick={handleDownloadResume}
+              className="bg-cyan-400 hover:bg-cyan-500 text-gray-900 font-semibold px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105"
+            >
               Download CV
             </button>
           </div>

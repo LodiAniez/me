@@ -1,4 +1,11 @@
 import React, { useState } from "react";
+import meanduImage from "../assets/projects/meandu.png";
+import singlifeImage from "../assets/projects/singlife.png";
+import sbsImage from "../assets/projects/sbs.png";
+import jcurveImage from "../assets/projects/jcurve.png";
+import campconnectionImage from "../assets/projects/campconnection.png";
+import canvaschatImage from "../assets/projects/canvaschat.png";
+import resumePDF from "../assets/resume.pdf";
 
 interface Project {
   id: number;
@@ -10,51 +17,62 @@ interface Project {
 const PortfolioGallery: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState("All");
 
-  const filters = ["All", "Design", "Brand", "Photos"];
+  const handleDownloadResume = () => {
+    const link = document.createElement("a");
+    link.href = resumePDF;
+    link.download = "Dexter_Louie_Aniez_Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const filters = ["All", "Web App", "Mobile App", "Widget"];
 
   const projects: Project[] = [
     {
       id: 1,
-      title: "Project Title 1",
-      category: "Design",
-      image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop",
+      title: "me&u app",
+      category: "Mobile App, Web App",
+      image: meanduImage,
     },
     {
       id: 2,
-      title: "Project Title 2",
-      category: "Brand",
-      image: "https://images.unsplash.com/photo-1542744095-291d1f67b221?w=600&h=400&fit=crop",
+      title: "Singlife",
+      category: "Mobile App",
+      image: singlifeImage,
     },
     {
       id: 3,
-      title: "Project Title 3",
-      category: "Photos",
-      image: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600&h=400&fit=crop",
+      title: "SBS",
+      category: "Web App",
+      image: sbsImage,
     },
     {
       id: 4,
-      title: "Project Title 4",
-      category: "Design",
-      image: "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=600&h=400&fit=crop",
+      title: "JCurve",
+      category: "Web App",
+      image: jcurveImage,
     },
     {
       id: 5,
-      title: "Project Title 5",
-      category: "Brand",
-      image: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=600&h=400&fit=crop",
+      title: "Camp Connection",
+      category: "Mobile App, Web App",
+      image: campconnectionImage,
     },
     {
       id: 6,
-      title: "Project Title 6",
-      category: "Photos",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
+      title: "Canvas Chat",
+      category: "Widget",
+      image: canvaschatImage,
     },
   ];
 
   const filteredProjects =
     activeFilter === "All"
       ? projects
-      : projects.filter((project) => project.category === activeFilter);
+      : projects.filter((project) =>
+          project.category.toLowerCase().includes(activeFilter.toLowerCase())
+        );
 
   return (
     <section id="portfolio" className="py-20 bg-gray-900">
@@ -98,7 +116,9 @@ const PortfolioGallery: React.FC = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                 <div className="p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    {project.title}
+                  </h3>
                   <p className="text-cyan-400 text-sm">{project.category}</p>
                 </div>
               </div>
@@ -128,6 +148,32 @@ const PortfolioGallery: React.FC = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Download Portfolio CTA */}
+        <div className="text-center mt-16">
+          <p className="text-gray-400 text-lg mb-6">
+            Want to see more of my work?
+          </p>
+          <button
+            onClick={handleDownloadResume}
+            className="inline-flex items-center gap-2 bg-cyan-400 hover:bg-cyan-500 text-gray-900 font-semibold px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+            Download CV to See More
+          </button>
         </div>
       </div>
     </section>

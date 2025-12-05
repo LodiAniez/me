@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -7,11 +8,45 @@ const Contact: React.FC = () => {
     subject: "",
     message: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(
+    null
+  );
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Add your form submission logic here
+    setIsLoading(true);
+    setSubmitStatus(null);
+
+    try {
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error(
+          "EmailJS configuration is missing. Please check your .env file."
+        );
+      }
+
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_email: "louieaniez@gmail.com",
+      };
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error) {
+      console.error("Email send failed:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (
@@ -211,10 +246,23 @@ const Contact: React.FC = () => {
               ></textarea>
               <button
                 type="submit"
-                className="bg-cyan-400 hover:bg-cyan-500 text-gray-900 font-semibold px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105"
+                disabled={isLoading}
+                className="bg-cyan-400 hover:bg-cyan-500 text-gray-900 font-semibold px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {isLoading ? "Sending..." : "Send Message"}
               </button>
+
+              {submitStatus === "success" && (
+                <div className="mt-4 p-4 bg-green-500/20 border border-green-500 rounded-lg text-green-400">
+                  Message sent successfully! I'll get back to you soon.
+                </div>
+              )}
+              {submitStatus === "error" && (
+                <div className="mt-4 p-4 bg-red-500/20 border border-red-500 rounded-lg text-red-400">
+                  Failed to send message. Please try again or email me directly
+                  at louieaniez@gmail.com
+                </div>
+              )}
             </form>
           </div>
         </div>

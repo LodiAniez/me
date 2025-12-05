@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from "react";
 import profileImage from "../assets/me.png";
+import resumePDF from "../assets/resume.pdf";
 
 const HeroIntro: React.FC = () => {
+  const handleDownloadResume = () => {
+    const link = document.createElement("a");
+    link.href = resumePDF;
+    link.download = "Dexter_Louie_Aniez_Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   const roles = ["Freelancer", "Fullstack Developer", "Mentor"];
   const [currentRole, setCurrentRole] = useState(0);
   const [displayText, setDisplayText] = useState("");
@@ -81,7 +90,10 @@ const HeroIntro: React.FC = () => {
           </p>
 
           {/* CTA Button */}
-          <button className="bg-cyan-400 hover:bg-cyan-500 text-gray-900 font-semibold px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
+          <button
+            onClick={handleDownloadResume}
+            className="bg-cyan-400 hover:bg-cyan-500 text-gray-900 font-semibold px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
+          >
             Hire Me
           </button>
         </div>

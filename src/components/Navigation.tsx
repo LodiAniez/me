@@ -28,7 +28,10 @@ const Navigation: React.FC = () => {
       });
     };
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions
+    );
 
     // Observe all sections
     navItems.forEach((item) => {
@@ -68,7 +71,7 @@ const Navigation: React.FC = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="text-2xl font-bold">
-            <span className="text-white">Dexter Louie</span>
+            <span className="text-white">Dexter Louie Aniez</span>
           </div>
 
           {/* Navigation Links */}

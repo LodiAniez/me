@@ -271,7 +271,8 @@ const Contact: React.FC = () => {
         <div className="mt-20 pt-8 border-t border-gray-800 text-center">
           <p className="text-gray-400">
             &copy; {new Date().getFullYear()}{" "}
-            <span className="text-cyan-400">Aniez</span>. All Rights Reserved.
+            <span className="text-cyan-400">Dexter Louie Aniez</span>. All
+            Rights Reserved.
           </p>
           <a
             href="#home"

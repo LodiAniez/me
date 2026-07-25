@@ -1,0 +1,981 @@
+/* ============================================================
+   DexterOS 95 — retro desk + Windows-95-style desktop styling
+   ============================================================ */
+
+:root {
+  --w95-face: #c0c0c0;
+  --w95-hl: #ffffff;
+  --w95-sh: #808080;
+  --w95-dk: #0a0a0a;
+  --w95-title: #000080;
+  --w95-title2: #1084d0;
+  --w95-desktop: #0a7d7d;
+  --w95-font: "Pixelated MS Sans Serif", Tahoma, "MS Sans Serif", Geneva,
+    sans-serif;
+}
+
+.desk-root,
+.desk-root * {
+  box-sizing: border-box;
+}
+
+.desk-root {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  font-family: var(--w95-font);
+  -webkit-font-smoothing: none;
+  user-select: none;
+}
+
+/* ---------- The room / desk ---------- */
+.scene {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 80% at 50% -10%, #3a4a63 0%, #2a3446 45%, #1c2331 100%);
+}
+.wall-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    60% 50% at 50% 38%,
+    rgba(120, 200, 255, 0.16),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+.desk-surface {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 34%;
+  background: linear-gradient(180deg, #7a5230 0%, #5f3f22 40%, #4a3019 100%);
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.5);
+  border-top: 3px solid #8a6238;
+}
+.desk-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    92deg,
+    rgba(0, 0, 0, 0.06) 0 2px,
+    transparent 2px 26px
+  );
+  opacity: 0.5;
+}
+
+/* ---------- CRT monitor ---------- */
+.monitor {
+  position: absolute;
+  top: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(70vw, 66vh * 1.33, 900px);
+  aspect-ratio: 1.32 / 1;
+  background: linear-gradient(160deg, #e8e3d3 0%, #ccc7b5 55%, #b3ae9c 100%);
+  border-radius: 22px;
+  padding: 3.2% 3.2% 5%;
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 255, 255, 0.4),
+    inset -6px -8px 20px rgba(0, 0, 0, 0.35),
+    0 24px 50px rgba(0, 0, 0, 0.6);
+}
+.monitor-brand {
+  position: absolute;
+  bottom: 1.2%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(9px, 1.2vw, 13px);
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #6b5a3a;
+}
+.monitor-led {
+  position: absolute;
+  bottom: 2%;
+  right: 8%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3cff5c;
+  box-shadow: 0 0 8px #3cff5c;
+}
+.screen-bezel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #050608;
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: inset 0 0 22px rgba(0, 0, 0, 0.9),
+    inset 0 0 0 2px #2a2a2a;
+}
+.screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--w95-desktop);
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.45);
+}
+/* CRT overlays — kept static & cheap (no blend modes / no per-frame repaint) */
+.screen-bezel::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 8px;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.08) 0 1px,
+    transparent 1px 3px
+  );
+  z-index: 9998;
+}
+.screen-bezel::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 9999;
+  background: radial-gradient(
+    120% 120% at 50% 50%,
+    transparent 62%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+}
+
+/* ---------- Boot screen ---------- */
+.boot {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  color: #c8c8c8;
+  font-family: "Courier New", monospace;
+  font-size: clamp(9px, 1.3vw, 15px);
+  padding: 5% 6%;
+  line-height: 1.6;
+  z-index: 50;
+  cursor: pointer;
+}
+.boot .cursor-block {
+  display: inline-block;
+  width: 0.6em;
+  height: 1em;
+  background: #c8c8c8;
+  vertical-align: -2px;
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+.boot-logo {
+  color: #fff;
+  font-weight: 700;
+}
+.boot-skip {
+  position: absolute;
+  bottom: 6%;
+  right: 6%;
+  color: #666;
+  font-size: 0.8em;
+}
+
+/* ---------- Windows-95 desktop ---------- */
+.desktop {
+  position: absolute;
+  inset: 0;
+  background: var(--w95-desktop);
+  overflow: hidden;
+}
+.desktop-icons {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 1;
+}
+.dicon {
+  width: 78px;
+  padding: 6px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  border: 1px dotted transparent;
+  text-align: center;
+}
+.dicon:hover { background: rgba(0, 0, 0, 0.12); }
+.dicon.selected {
+  background: rgba(0, 0, 128, 0.5);
+  border: 1px dotted #fff;
+}
+.dicon-glyph {
+  font-size: 30px;
+  line-height: 1;
+  filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.4));
+}
+.dicon-label {
+  font-size: 11px;
+  color: #fff;
+  text-shadow: 1px 1px 0 #000;
+  line-height: 1.15;
+}
+.dicon.selected .dicon-label { background: #000080; }
+
+/* ---------- Window chrome ---------- */
+.bevel-out {
+  border: 2px solid;
+  border-color: var(--w95-hl) var(--w95-dk) var(--w95-dk) var(--w95-hl);
+  box-shadow: inset 1px 1px 0 var(--w95-face), inset -1px -1px 0 var(--w95-sh);
+}
+.bevel-in {
+  border: 2px solid;
+  border-color: var(--w95-sh) var(--w95-hl) var(--w95-hl) var(--w95-sh);
+  box-shadow: inset 1px 1px 0 var(--w95-dk), inset -1px -1px 0 var(--w95-face);
+}
+
+.window {
+  position: absolute;
+  background: var(--w95-face);
+  border: 2px solid;
+  border-color: var(--w95-hl) var(--w95-dk) var(--w95-dk) var(--w95-hl);
+  box-shadow: inset 1px 1px 0 var(--w95-face), inset -1px -1px 0 var(--w95-sh);
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  padding: 2px;
+}
+.title-bar {
+  height: 22px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 2px 0 4px;
+  background: linear-gradient(90deg, var(--w95-title), var(--w95-title2));
+  color: #fff;
+  cursor: grab;
+  flex: 0 0 auto;
+}
+.title-bar.inactive {
+  background: linear-gradient(90deg, #808080, #b5b5b5);
+}
+.title-bar-icon { font-size: 13px; }
+.title-bar-text {
+  flex: 1;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+}
+.title-controls { display: flex; gap: 2px; }
+.tctl {
+  width: 18px;
+  height: 16px;
+  background: var(--w95-face);
+  border: 2px solid;
+  border-color: var(--w95-hl) var(--w95-dk) var(--w95-dk) var(--w95-hl);
+  color: #000;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+.tctl:active {
+  border-color: var(--w95-dk) var(--w95-hl) var(--w95-hl) var(--w95-dk);
+}
+.window-menubar {
+  display: flex;
+  gap: 2px;
+  padding: 2px 3px;
+  font-size: 12px;
+  flex: 0 0 auto;
+}
+.window-menubar span { padding: 1px 6px; cursor: default; }
+.window-menubar span u { text-decoration: underline; }
+.window-body {
+  flex: 1 1 auto;
+  overflow: auto;
+  background: var(--w95-face);
+  padding: 10px;
+  font-size: 13px;
+  color: #000;
+  line-height: 1.45;
+}
+.window-body.paper {
+  background: #fff;
+  margin: 2px;
+  border: 2px solid;
+  border-color: var(--w95-sh) var(--w95-hl) var(--w95-hl) var(--w95-sh);
+}
+.statusbar {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 4px;
+  padding: 2px;
+  font-size: 11px;
+}
+.statusbar .cell {
+  padding: 2px 6px;
+  border: 1px solid;
+  border-color: var(--w95-sh) var(--w95-hl) var(--w95-hl) var(--w95-sh);
+  flex: 1;
+}
+
+/* ---------- Controls ---------- */
+.btn95 {
+  font-family: var(--w95-font);
+  font-size: 12px;
+  padding: 4px 12px;
+  background: var(--w95-face);
+  border: 2px solid;
+  border-color: var(--w95-hl) var(--w95-dk) var(--w95-dk) var(--w95-hl);
+  box-shadow: inset 1px 1px 0 var(--w95-face), inset -1px -1px 0 var(--w95-sh);
+  cursor: pointer;
+  color: #000;
+}
+.btn95:active {
+  border-color: var(--w95-dk) var(--w95-hl) var(--w95-hl) var(--w95-dk);
+  box-shadow: inset -1px -1px 0 var(--w95-face), inset 1px 1px 0 var(--w95-sh);
+}
+.btn95:disabled { color: var(--w95-sh); cursor: default; }
+.field95 {
+  font-family: var(--w95-font);
+  font-size: 13px;
+  padding: 3px 5px;
+  background: #fff;
+  border: 2px solid;
+  border-color: var(--w95-sh) var(--w95-hl) var(--w95-hl) var(--w95-sh);
+  color: #000;
+  width: 100%;
+}
+.field95:focus { outline: 1px dotted #000; }
+
+/* ---------- Taskbar ---------- */
+.taskbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 30px;
+  background: var(--w95-face);
+  border-top: 2px solid var(--w95-hl);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px;
+  z-index: 5000;
+}
+.start-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 3px 8px 3px 6px;
+  background: var(--w95-face);
+  border: 2px solid;
+  border-color: var(--w95-hl) var(--w95-dk) var(--w95-dk) var(--w95-hl);
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+.start-btn.open,
+.start-btn:active {
+  border-color: var(--w95-dk) var(--w95-hl) var(--w95-hl) var(--w95-dk);
+}
+.start-logo {
+  width: 18px; height: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  transform: skewX(-6deg);
+}
+.start-logo i { display: block; }
+.start-logo i:nth-child(1) { background: #ff5555; }
+.start-logo i:nth-child(2) { background: #55ff55; }
+.start-logo i:nth-child(3) { background: #5599ff; }
+.start-logo i:nth-child(4) { background: #ffdb43; }
+.task-divider { width: 2px; height: 22px; margin: 0 2px;
+  border-left: 1px solid var(--w95-sh); border-right: 1px solid var(--w95-hl); }
+.task-btns { flex: 1; display: flex; gap: 3px; overflow: hidden; }
+.task-btn {
+  min-width: 130px; max-width: 160px;
+  display: flex; align-items: center; gap: 5px;
+  font-size: 12px; padding: 2px 6px;
+  background: var(--w95-face);
+  border: 2px solid;
+  border-color: var(--w95-hl) var(--w95-dk) var(--w95-dk) var(--w95-hl);
+  cursor: pointer;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.task-btn.active {
+  border-color: var(--w95-dk) var(--w95-hl) var(--w95-hl) var(--w95-dk);
+  background: repeating-conic-gradient(#bcbcbc 0% 25%, #c8c8c8 0% 50%) 0 0 / 4px 4px;
+  font-weight: 700;
+}
+.tray {
+  display: flex; align-items: center; gap: 6px;
+  padding: 3px 8px;
+  border: 1px solid;
+  border-color: var(--w95-sh) var(--w95-hl) var(--w95-hl) var(--w95-sh);
+  font-size: 12px;
+  flex: 0 0 auto;
+}
+
+/* ---------- Start menu ---------- */
+.start-menu {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  width: 220px;
+  background: var(--w95-face);
+  border: 2px solid;
+  border-color: var(--w95-hl) var(--w95-dk) var(--w95-dk) var(--w95-hl);
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+  display: flex;
+  z-index: 6000;
+  padding: 2px;
+}
+.start-side {
+  width: 30px;
+  background: linear-gradient(180deg, #000080, #1084d0);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  text-align: center;
+  padding: 8px 4px;
+  letter-spacing: 1px;
+}
+.start-items { flex: 1; }
+.start-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 5px 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.start-item:hover { background: #000080; color: #fff; }
+.start-item .g { font-size: 18px; width: 20px; text-align: center; }
+.start-sep { height: 2px; margin: 3px 2px;
+  border-top: 1px solid var(--w95-sh); border-bottom: 1px solid var(--w95-hl); }
+
+/* ---------- Window content helpers ---------- */
+.h-accent { color: #000080; }
+.paper h2 { font-size: 16px; margin: 0 0 6px; }
+.paper h3 { font-size: 14px; margin: 12px 0 4px; }
+.paper p { margin: 0 0 8px; }
+.field-row { display: flex; gap: 8px; margin-bottom: 6px; }
+.field-row .lbl { width: 90px; color: #444; flex: 0 0 auto; }
+.skillbar-track {
+  height: 16px; background: #fff; margin-top: 2px;
+  border: 2px solid; border-color: var(--w95-sh) var(--w95-hl) var(--w95-hl) var(--w95-sh);
+  padding: 1px;
+}
+.skillbar-fill {
+  height: 100%;
+  background: repeating-linear-gradient(90deg, #000080 0 8px, #1084d0 8px 10px);
+}
+.timeline-item {
+  border-left: 2px solid #000080;
+  padding: 0 0 12px 12px;
+  margin-left: 4px;
+  position: relative;
+}
+.timeline-item::before {
+  content: ""; position: absolute; left: -5px; top: 3px;
+  width: 8px; height: 8px; background: #000080;
+}
+.proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.proj-card { cursor: pointer; }
+.proj-card img {
+  width: 100%; height: 96px; object-fit: cover; display: block;
+  border: 2px solid; border-color: var(--w95-sh) var(--w95-hl) var(--w95-hl) var(--w95-sh);
+}
+.proj-card .cap { font-size: 12px; margin-top: 3px; }
+.proj-card .cap b { color: #000080; }
+.testi-card { margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px dotted #999; }
+.testi-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.testi-head img { width: 34px; height: 34px; object-fit: cover;
+  border: 2px solid; border-color: var(--w95-sh) var(--w95-hl) var(--w95-hl) var(--w95-sh); }
+.link95 { color: #0000ee; text-decoration: underline; cursor: pointer; }
+.link95:visited { color: #551a8b; }
+
+/* ---------- Desk props ---------- */
+.prop {
+  position: absolute;
+  cursor: pointer;
+  transition: transform 0.12s ease, filter 0.12s ease;
+  z-index: 3;
+}
+.prop:hover { transform: translateY(-4px) scale(1.04); filter: brightness(1.1); }
+.prop .tip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 6px;
+  background: #ffffcc;
+  color: #000;
+  border: 1px solid #000;
+  font-size: 11px;
+  padding: 2px 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s;
+}
+.prop:hover .tip { opacity: 1; }
+.nameplate {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #d9b26a, #b5893f);
+  color: #2a1a06;
+  font-weight: 700;
+  padding: 5px 16px;
+  border: 2px solid #7a5a24;
+  border-radius: 3px;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+  z-index: 3;
+  font-size: clamp(10px, 1.4vw, 15px);
+  letter-spacing: 0.5px;
+}
+.nameplate small { display:block; font-weight: 400; font-size: 0.75em; opacity: 0.8; }
+
+/* Sticky note */
+.sticky {
+  width: 92px; height: 92px;
+  background: #fff59a;
+  box-shadow: 2px 3px 8px rgba(0,0,0,0.35);
+  transform: rotate(-6deg);
+  padding: 8px;
+  font-size: 11px;
+  color: #5a4a00;
+  font-family: "Comic Sans MS", "Segoe Print", cursive;
+  line-height: 1.25;
+}
+.prop.sticky-wrap:hover .sticky { transform: rotate(-6deg) translateY(-4px) scale(1.04); }
+
+/* Floppy disk */
+.floppy {
+  width: 76px; height: 78px;
+  background: #2b3a67;
+  border-radius: 4px 4px 6px 6px;
+  position: relative;
+  box-shadow: 2px 3px 8px rgba(0,0,0,0.4);
+}
+.floppy .shutter {
+  position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+  width: 34px; height: 26px; background: #b9c0cc; border-radius: 2px;
+}
+.floppy .shutter::after {
+  content:""; position:absolute; right:5px; top:3px; width:8px; height:20px; background:#8a92a3;
+}
+.floppy .label {
+  position: absolute; bottom: 6px; left: 6px; right: 6px; height: 34px;
+  background: #f4f1e4; border-radius: 1px;
+  font-size: 9px; color: #333; padding: 3px 4px; line-height: 1.15;
+  font-family: "Courier New", monospace;
+}
+.floppy .label b { color: #a11; }
+
+/* Coffee mug */
+.mug {
+  width: 66px; height: 60px; background: #d94a3d; border-radius: 6px 6px 10px 10px;
+  position: relative; box-shadow: 2px 3px 8px rgba(0,0,0,0.4);
+}
+.mug::after {
+  content:""; position:absolute; right:-16px; top:12px; width:20px; height:26px;
+  border: 6px solid #d94a3d; border-left: none; border-radius: 0 12px 12px 0;
+}
+.mug .coffee {
+  position:absolute; top:6px; left:8px; right:8px; height:12px;
+  background: #3a2416; border-radius: 50%;
+}
+.mug .steam { position:absolute; top:-14px; left:20px; font-size:14px; opacity:0.5;
+  animation: steam 2.4s ease-in-out infinite; }
+@keyframes steam { 0%,100%{transform:translateY(0);opacity:.2} 50%{transform:translateY(-4px);opacity:.6} }
+
+/* Sketchbook */
+.sketchbook {
+  width: 96px; height: 74px; background: #c94f7c; border-radius: 3px;
+  position: relative; box-shadow: 2px 3px 8px rgba(0,0,0,0.4);
+  transform: rotate(4deg);
+}
+.sketchbook::before {
+  content:""; position:absolute; left:8px; top:0; bottom:0; width:8px;
+  background: repeating-linear-gradient(#eee 0 3px, transparent 3px 8px);
+}
+.sketchbook .doodle {
+  position:absolute; right:8px; top:8px; bottom:8px; left:24px; background:#fff;
+  border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:26px;
+}
+
+/* Keyboard */
+.keyboard {
+  position:absolute; bottom: 3%; left: 50%; transform: translateX(-50%) perspective(300px) rotateX(38deg);
+  width: min(42vw, 460px); height: 70px; background: linear-gradient(#d8d4c6,#b0ac9c);
+  border-radius: 6px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 2;
+  padding: 8px; display:flex; flex-direction:column; gap:3px;
+}
+.keyboard .krow { display:flex; gap:3px; flex:1; }
+.keyboard .key { flex:1; background: linear-gradient(#f2efe4,#cfcabb); border-radius:2px;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,0.15); }
+.keyboard .key.space { flex: 6; }
+
+.crt-off {
+  position:absolute; inset:0; background:#000; color:#ddd; z-index:60;
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  font-size: clamp(11px,1.5vw,18px); cursor:pointer; padding: 10%;
+}
+
+/* ============================================================
+   Vibe layer — warm lighting, CRT life, extra desk props
+   ============================================================ */
+
+/* Warm desk-lamp light spilling from the top-left + cozy vignette */
+.room-warm {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    radial-gradient(38% 46% at 14% 6%, rgba(255, 196, 120, 0.28), transparent 60%),
+    radial-gradient(120% 120% at 50% 44%, transparent 58%, rgba(0, 0, 0, 0.45) 100%);
+}
+
+/* Teal glow the monitor casts onto the desk, ties the scene together */
+.screen-cast {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translateX(-50%);
+  width: 62%;
+  height: 34%;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(
+    50% 60% at 50% 0%,
+    rgba(80, 220, 210, 0.22),
+    transparent 72%
+  );
+  filter: blur(6px);
+}
+
+/* Cheap, compositor-friendly CRT life (opacity + transform only, no blend) */
+.crt-fx {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9990;
+  overflow: hidden;
+}
+.crt-fx .flick {
+  position: absolute;
+  inset: 0;
+  background: rgba(18, 40, 34, 0.05);
+  animation: crt-flick 4s steps(3) infinite;
+  will-change: opacity;
+}
+@keyframes crt-flick {
+  0%, 100% { opacity: 0.35; }
+  47% { opacity: 0.5; }
+  50% { opacity: 0.9; }
+  53% { opacity: 0.45; }
+  92% { opacity: 0.35; }
+  94% { opacity: 0.85; }
+}
+.crt-fx .sweep {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -45%;
+  height: 45%;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: crt-sweep 7s linear infinite;
+  will-change: transform;
+}
+@keyframes crt-sweep {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(340%); }
+}
+
+/* Potted plant */
+.plant { width: 62px; height: 84px; }
+.plant .pot {
+  position: absolute; bottom: 0; left: 14px; width: 34px; height: 30px;
+  background: linear-gradient(#c06a2a, #9a4f1c);
+  clip-path: polygon(12% 0, 88% 0, 76% 100%, 24% 100%);
+  box-shadow: 2px 3px 8px rgba(0,0,0,0.4);
+}
+.plant .leaf {
+  position: absolute; width: 20px; height: 40px;
+  background: linear-gradient(#3aa564, #237a45);
+  border-radius: 60% 60% 55% 55% / 80% 80% 40% 40%;
+  transform-origin: bottom center;
+}
+.plant .leaf.l1 { left: 8px; bottom: 24px; transform: rotate(-32deg); }
+.plant .leaf.l2 { left: 22px; bottom: 26px; height: 48px; }
+.plant .leaf.l3 { left: 34px; bottom: 24px; transform: rotate(30deg); }
+
+/* Mouse + mousepad */
+.mousepad {
+  width: 96px; height: 62px; background: #2b3550; border-radius: 8px;
+  box-shadow: inset 0 0 0 3px #3a466a, 2px 3px 8px rgba(0,0,0,0.35);
+}
+.mouse95 {
+  position: absolute; top: 12px; left: 34px;
+  width: 26px; height: 40px;
+  background: linear-gradient(#f2efe4, #cfcabb);
+  border-radius: 13px 13px 12px 12px;
+  box-shadow: 1px 2px 4px rgba(0,0,0,0.4);
+}
+.mouse95::before {
+  content: ""; position: absolute; top: 4px; left: 50%; transform: translateX(-50%);
+  width: 2px; height: 12px; background: #9a978c;
+}
+
+/* Wall window with blinds + dusk sky */
+.wall-window {
+  position: absolute;
+  border: 9px solid #6b4a2a;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: inset 0 0 26px rgba(0, 0, 0, 0.55), 0 8px 22px rgba(0, 0, 0, 0.45);
+  background: #0b1030;
+}
+.wall-window .sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(#141b45 0%, #2b3566 55%, #6a4a6e 100%);
+}
+.wall-window .moon {
+  position: absolute;
+  top: 14%;
+  right: 22%;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #f3efce;
+  box-shadow: 0 0 20px rgba(243, 239, 206, 0.7);
+}
+.wall-window .stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1.4px 1.4px at 20% 30%, #fff, transparent),
+    radial-gradient(1.4px 1.4px at 60% 20%, #fff, transparent),
+    radial-gradient(1.4px 1.4px at 80% 60%, #fff, transparent),
+    radial-gradient(1.4px 1.4px at 35% 70%, #fff, transparent),
+    radial-gradient(1.4px 1.4px at 50% 45%, #fff, transparent);
+  opacity: 0.8;
+}
+.wall-window .blinds {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    rgba(232, 228, 214, 0.92) 0 7px,
+    rgba(140, 135, 120, 0.5) 7px 8px,
+    rgba(216, 212, 198, 0.92) 8px 15px
+  );
+  opacity: 0.55;
+}
+.wall-window .cord {
+  position: absolute;
+  top: 0;
+  right: 14%;
+  width: 2px;
+  height: 40%;
+  background: #cbb27a;
+}
+.wall-window .cord::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: -2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #cbb27a;
+}
+
+/* Framed photo on the wall */
+.photo-frame {
+  position: absolute;
+  background: linear-gradient(145deg, #d7b174, #b98c46);
+  padding: 7px;
+  border-radius: 2px;
+  border: 2px solid #7f5f2c;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+}
+.photo-frame .pic {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(#8fd2ef 0 56%, #5cb36a 56% 100%);
+}
+.photo-frame .sun {
+  position: absolute;
+  top: 12%;
+  left: 22%;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffe08a;
+  box-shadow: 0 0 12px rgba(255, 224, 138, 0.8);
+}
+.photo-frame .hill {
+  position: absolute;
+  bottom: 30%;
+  left: -12%;
+  right: -12%;
+  height: 46%;
+  background: #3f915c;
+  border-radius: 50% 50% 0 0;
+}
+.photo-frame .hill.h2 {
+  left: 30%;
+  right: -30%;
+  background: #327a4b;
+  bottom: 30%;
+}
+
+/* Rotary phone */
+.rotary { width: 104px; height: 60px; }
+.rotary .base {
+  position: absolute;
+  bottom: 0;
+  width: 104px;
+  height: 42px;
+  background: linear-gradient(#c62a3a, #8f1b28);
+  border-radius: 16px 16px 22px 22px;
+  box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.45);
+}
+.rotary .dial {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #7c1420;
+  box-shadow: inset 0 0 0 5px #e0576a, 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+.rotary .handset {
+  position: absolute;
+  top: 0;
+  left: 4px;
+  right: 4px;
+  height: 15px;
+  background: linear-gradient(#a01f2c, #7c1420);
+  border-radius: 9px;
+}
+.rotary .handset::before,
+.rotary .handset::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(#a01f2c, #7c1420);
+  border-radius: 8px;
+}
+.rotary .handset::before { left: -4px; }
+.rotary .handset::after { right: -4px; }
+
+/* Cassette tape */
+.cassette {
+  width: 84px;
+  height: 54px;
+  background: linear-gradient(#33333d, #22222a);
+  border-radius: 5px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.42);
+  transform: rotate(-5deg);
+  position: relative;
+}
+.cassette .clabel {
+  position: absolute;
+  top: 5px;
+  left: 6px;
+  right: 6px;
+  height: 20px;
+  background: #ece2a6;
+  border-radius: 2px;
+  font-size: 8px;
+  line-height: 20px;
+  text-align: center;
+  color: #4a3a10;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.cassette .reels {
+  position: absolute;
+  bottom: 7px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+.cassette .reel {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #d8d4c6;
+  border: 3px solid #55555f;
+}
+
+/* Monitor power button */
+.power-btn {
+  position: absolute;
+  bottom: 1.4%;
+  left: 9%;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #efeade, #b0ab98);
+  border: 2px solid #8a856f;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #4a4a42;
+  z-index: 4;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+.power-btn:hover { filter: brightness(1.08); }
+.power-btn:active { box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4); }
+
+/* Small screens: let windows use most of the CRT, shrink icons */
+@media (max-width: 720px) {
+  .monitor { width: 94vw; top: 2%; }
+  .dicon { width: 66px; }
+  .dicon-glyph { font-size: 26px; }
+  .task-btn { min-width: 46px; }
+  .task-btn .lbl { display: none; }
+  .proj-grid { grid-template-columns: 1fr; }
+  .plant, .mousepad, .cassette, .rotary, .photo-frame, .wall-window {
+    display: none;
+  }
+}

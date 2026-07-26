@@ -1,17 +1,20 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useOS } from "./useOSStore";
 
 // Pointer-drag behaviour for a window's title bar, clamped to the desktop.
-// Dragging is disabled while the window is maximized.
+// Dragging is disabled while the window is maximized. `dragging` lets the
+// window drop its CSS transition mid-drag so it tracks the pointer 1:1.
 export function useDraggableWindow(id: string, x: number, y: number, disabled = false) {
   const { focus, move } = useOS();
   const drag = useRef<{ dx: number; dy: number } | null>(null);
   const winRef = useRef<HTMLDivElement>(null);
+  const [dragging, setDragging] = useState(false);
 
   const onDragStart = (e: React.PointerEvent) => {
     if (disabled || (e.target as HTMLElement).closest(".tctl")) return;
     focus(id);
     drag.current = { dx: e.clientX - x, dy: e.clientY - y };
+    setDragging(true);
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
   };
 
@@ -30,7 +33,8 @@ export function useDraggableWindow(id: string, x: number, y: number, disabled = 
 
   const onDragEnd = () => {
     drag.current = null;
+    setDragging(false);
   };
 
-  return { winRef, onDragStart, onDragMove, onDragEnd };
+  return { winRef, onDragStart, onDragMove, onDragEnd, dragging };
 }

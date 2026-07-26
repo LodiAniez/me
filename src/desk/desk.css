@@ -252,6 +252,8 @@
   flex-direction: column;
   min-width: 180px;
   padding: 2px;
+  transition: left 0.22s ease, top 0.22s ease, width 0.22s ease,
+    height 0.22s ease;
 }
 .title-bar {
   height: 22px;

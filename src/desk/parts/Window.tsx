@@ -19,12 +19,8 @@ export default function Window({
   children,
 }: WindowProps) {
   const { focus, close, minimize, maximize } = useOS();
-  const { winRef, onDragStart, onDragMove, onDragEnd } = useDraggableWindow(
-    id,
-    x,
-    y,
-    maximized
-  );
+  const { winRef, onDragStart, onDragMove, onDragEnd, dragging } =
+    useDraggableWindow(id, x, y, maximized);
 
   const style: CSSProperties = maximized
     ? { left: 0, top: 0, zIndex: z, width: "100%", height: "calc(100% - 30px)" }
@@ -35,6 +31,8 @@ export default function Window({
         width: `min(${width}px, 96%)`,
         height: `min(${height}px, 88%)`,
       };
+  // Animate maximize/restore, but not while dragging (keeps the drag 1:1).
+  style.transition = dragging ? "none" : undefined;
 
   return (
     <div

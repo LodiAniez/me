@@ -10,6 +10,7 @@ import {
   skills,
   projects,
   testimonials,
+  achievements,
   socials,
   downloadResume,
   ME_IMG,
@@ -353,6 +354,42 @@ const ContactWindow: FC = () => {
   );
 };
 
+/* ------------------------------ Achievements ------------------------------ */
+const AchievementsWindow: FC = () => (
+  <>
+    <div className="window-body paper">
+      <h2>🏆 Achievements</h2>
+      {achievements.map((a) => (
+        <div
+          key={a.title}
+          className="bevel-in"
+          style={{ background: "#fffef5", padding: 10, marginBottom: 10 }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ fontSize: 26 }}>{a.icon}</span>
+            <div>
+              <div style={{ fontWeight: 700 }} className="h-accent">
+                {a.title}
+              </div>
+              <div style={{ fontSize: 12, color: "#444" }}>{a.event}</div>
+            </div>
+          </div>
+          <div style={{ marginTop: 8 }}>
+            <span style={{ fontWeight: 700 }}>💾 App:</span> {a.app}
+            <p style={{ margin: "2px 0 0", fontSize: 12 }}>{a.appDescription}</p>
+          </div>
+          <div style={{ marginTop: 6 }}>
+            <span style={{ fontWeight: 700 }}>🎖️ Role:</span> {a.role}
+          </div>
+        </div>
+      ))}
+    </div>
+    <div className="statusbar">
+      <span className="cell">{achievements.length} achievement(s)</span>
+    </div>
+  </>
+);
+
 /* ------------------------------ Registry ------------------------------ */
 export const REGISTRY: Record<string, WinMeta> = {
   readme: { title: "readme.txt - Notepad", icon: "📝", width: 420, height: 320, Component: ReadmeWindow },
@@ -362,5 +399,6 @@ export const REGISTRY: Record<string, WinMeta> = {
   resume: { title: "resume.doc - WordPad", icon: "📜", width: 480, height: 460, Component: ResumeWindow },
   projects: { title: "Projects", icon: "📁", width: 500, height: 420, Component: ProjectsWindow },
   guestbook: { title: "Guestbook", icon: "📖", width: 460, height: 420, Component: GuestbookWindow },
+  achievements: { title: "Achievements", icon: "🏆", width: 470, height: 380, Component: AchievementsWindow },
   contact: { title: "New Message", icon: "✉️", width: 460, height: 430, Component: ContactWindow },
 };

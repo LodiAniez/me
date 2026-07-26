@@ -149,6 +149,27 @@ export const experience = [
   },
 ];
 
+export interface Achievement {
+  title: string;
+  event: string;
+  icon: string;
+  app: string;
+  appDescription: string;
+  role: string;
+}
+
+export const achievements: Achievement[] = [
+  {
+    title: "Top 10 Finalist",
+    event: "Build In! Payments Hackathon",
+    icon: "🏆",
+    app: "Raket App",
+    appDescription:
+      "An app that generates invoices for clients and helps move money across cross-border transactions using Morph.",
+    role: "Led a team of 3 developers to build the app during the hackathon.",
+  },
+];
+
 export const skills = [
   { name: "HTML/CSS", percentage: 95 },
   { name: "JavaScript", percentage: 95 },

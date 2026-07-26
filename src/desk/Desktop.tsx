@@ -11,6 +11,7 @@ const DESKTOP_ICONS: Array<{ id: string; label: string }> = [
   { id: "resume", label: "Resume" },
   { id: "services", label: "What I Do" },
   { id: "guestbook", label: "Guestbook" },
+  { id: "achievements", label: "Achievements" },
   { id: "contact", label: "Contact" },
   { id: "readme", label: "readme.txt" },
 ];

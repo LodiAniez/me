@@ -7,6 +7,7 @@ const START_ITEMS: Array<{ id: string; label: string }> = [
   { id: "resume", label: "Resume" },
   { id: "projects", label: "Projects" },
   { id: "services", label: "What I Do" },
+  { id: "achievements", label: "Achievements" },
   { id: "guestbook", label: "Guestbook" },
   { id: "mycomputer", label: "My Computer" },
 ];

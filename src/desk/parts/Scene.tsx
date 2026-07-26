@@ -1,5 +1,5 @@
 import { useDeskScene } from "../hooks/useDeskScene";
-import { profile } from "../content";
+import { profile, ME_IMG } from "../content";
 import Monitor from "./Monitor";
 import DeskProps from "./DeskProps";
 import Notebook from "./Notebook";
@@ -37,13 +37,10 @@ export default function Scene() {
       </div>
       <div
         className="photo-frame"
-        style={{ left: "5%", top: "9%", width: "min(11vw, 150px)", height: "min(9vw, 120px)" }}
-        aria-hidden
+        style={{ left: "5%", top: "9%", width: "min(11vw, 150px)", height: "min(11vw, 150px)" }}
       >
         <div className="pic">
-          <div className="sun" />
-          <div className="hill h2" />
-          <div className="hill" />
+          <img className="pic-photo" src={ME_IMG} alt={profile.name} />
         </div>
       </div>
 

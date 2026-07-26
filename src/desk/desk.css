@@ -833,7 +833,15 @@
   height: 100%;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(#8fd2ef 0 56%, #5cb36a 56% 100%);
+  background: #dfe4ee;
+}
+.photo-frame .pic-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  image-rendering: auto;
 }
 .photo-frame .sun {
   position: absolute;

@@ -217,17 +217,14 @@ function SceneInner() {
         </div>
       </Prop>
 
-      <Prop
-        style={{ right: "6%", bottom: "8%" }}
-        tip="About me — my diary ☕"
-        label="Coffee mug — about me diary"
-        onOpen={() => setNotebookPage(1)}
+      <div
+        className="mug"
+        style={{ position: "absolute", right: "6%", bottom: "8%", zIndex: 3 }}
+        aria-hidden
       >
-        <div className="mug">
-          <span className="steam">≋</span>
-          <div className="coffee" />
-        </div>
-      </Prop>
+        <span className="steam">≋</span>
+        <div className="coffee" />
+      </div>
 
       {/* Decorative props (no interaction) */}
       <div

@@ -140,6 +140,13 @@ export const experience = [
     description:
       "Enhanced depot management applications for a Dubai startup. Developed new features, fixed bugs, and optimized performance while maintaining direct client communication to deliver efficient digital solutions.",
   },
+  {
+    year: "Jul 2025 - Present",
+    title: "Software Engineer 2",
+    company: "me&u",
+    description:
+      "Building and scaling features for me&u's order-at-table hospitality platform. Crafting polished, responsive frontends and dependable services used across venues, collaborating with cross-functional teams to ship quality at pace.",
+  },
 ];
 
 export const skills = [

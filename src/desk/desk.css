@@ -195,9 +195,10 @@
   position: absolute;
   top: 8px;
   left: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(3, min-content);
+  gap: 4px 8px;
   z-index: 1;
 }
 .dicon {

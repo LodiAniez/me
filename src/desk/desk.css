@@ -1006,6 +1006,7 @@
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 0 0 2px #f1e6c8;
   animation: nb-open 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.25);
   transform-origin: center 40%;
+  perspective: 1600px;
 }
 @keyframes nb-open {
   from { transform: scale(0.55) rotate(-6deg); opacity: 0; }
@@ -1098,3 +1099,70 @@
   color: #b09a68;
   font-size: 13px;
 }
+
+/* Diary page-flip + navigation */
+.nb-page.flip-next { animation: nb-flip-next 0.35s ease; transform-origin: left center; }
+.nb-page.flip-prev { animation: nb-flip-prev 0.35s ease; transform-origin: right center; }
+@keyframes nb-flip-next {
+  from { transform: rotateY(85deg); opacity: 0.2; }
+  to { transform: rotateY(0); opacity: 1; }
+}
+@keyframes nb-flip-prev {
+  from { transform: rotateY(-85deg); opacity: 0.2; }
+  to { transform: rotateY(0); opacity: 1; }
+}
+.nb-nav {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 18px;
+  border-top: 1px dashed #cbb887;
+  background: #f6ecc8;
+  font-family: "Comic Sans MS", "Segoe Print", cursive;
+  border-radius: 0 0 6px 6px;
+}
+.nb-turn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  color: #7a5a2a;
+  padding: 4px 8px;
+}
+.nb-turn:hover:not(:disabled) { color: #c0392b; text-decoration: underline wavy #e6a6a6; }
+.nb-turn:disabled { color: #c9bd9a; cursor: default; }
+.nb-dots { display: flex; gap: 8px; }
+.nb-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #d8c79a;
+  box-shadow: inset 0 0 0 1px #b7a26f;
+}
+.nb-dot.on { background: #c0392b; }
+
+/* Diary (About) page bits */
+.nb-greet { font-size: 16px; margin: 6px 0 8px; color: #2b466f; }
+.nb-diary { font-size: 13.5px; line-height: 1.9; margin: 0 0 10px; color: #3f4a5a; }
+.nb-notes {
+  margin: 12px 0;
+  padding: 8px 12px;
+  border: 1px dashed #cbb887;
+  border-radius: 4px;
+  background: #fffbe9;
+  font-size: 13px;
+  line-height: 2;
+  color: #4a5568;
+}
+.nb-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 12.5px;
+  color: #8a6a2a;
+  margin-bottom: 8px;
+}
+.nb-stats b { color: #c0392b; }
+.nb-sign { text-align: right; font-size: 15px; color: #2b466f; margin-top: 12px; }

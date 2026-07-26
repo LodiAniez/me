@@ -42,7 +42,7 @@ function Prop({
 function SceneInner() {
   const { open } = useOS();
   const [phase, setPhase] = useState<Phase>("boot");
-  const [notebookOpen, setNotebookOpen] = useState(false);
+  const [notebookPage, setNotebookPage] = useState<number | null>(null);
 
   const openApp = (id: string) => {
     if (phase !== "on") setPhase("on");
@@ -210,7 +210,7 @@ function SceneInner() {
         style={{ right: "15%", bottom: "6%" }}
         tip="What I do (open notebook)"
         label="Sketchbook — what I do"
-        onOpen={() => setNotebookOpen(true)}
+        onOpen={() => setNotebookPage(0)}
       >
         <div className="sketchbook">
           <div className="doodle">✏️</div>
@@ -219,9 +219,9 @@ function SceneInner() {
 
       <Prop
         style={{ right: "6%", bottom: "8%" }}
-        tip="About me ☕"
-        label="Coffee mug — about"
-        onOpen={() => openApp("about")}
+        tip="About me — my diary ☕"
+        label="Coffee mug — about me diary"
+        onOpen={() => setNotebookPage(1)}
       >
         <div className="mug">
           <span className="steam">≋</span>
@@ -272,7 +272,9 @@ function SceneInner() {
       {/* Warm room lighting on top for cohesion */}
       <div className="room-warm" />
 
-      {notebookOpen && <Notebook onClose={() => setNotebookOpen(false)} />}
+      {notebookPage !== null && (
+        <Notebook initialPage={notebookPage} onClose={() => setNotebookPage(null)} />
+      )}
     </div>
   );
 }

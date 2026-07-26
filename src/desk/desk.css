@@ -1167,3 +1167,31 @@
 }
 .nb-stats b { color: #c0392b; }
 .nb-sign { text-align: right; font-size: 15px; color: #2b466f; margin-top: 12px; }
+
+/* Zoomed-in Notepad (readme.txt) overlay */
+.zoom-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5vh 16px;
+  background: rgba(6, 10, 18, 0.72);
+  backdrop-filter: blur(3px);
+}
+.zoom-notepad {
+  position: relative !important;
+  left: auto;
+  top: auto;
+  width: min(90vw, 620px);
+  max-height: 86vh;
+  animation: nb-open 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.25);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+}
+.zoom-body {
+  font-size: 15px;
+  line-height: 1.8;
+}
+.zoom-body h2 { font-size: 19px; margin: 0 0 10px; }
+.zoom-body ul { line-height: 1.9; }

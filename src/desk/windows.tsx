@@ -374,13 +374,20 @@ const AchievementsWindow: FC = () => (
               <div style={{ fontSize: 12, color: "#444" }}>{a.event}</div>
             </div>
           </div>
-          <div style={{ marginTop: 8 }}>
-            <span style={{ fontWeight: 700 }}>💾 App:</span> {a.app}
-            <p style={{ margin: "2px 0 0", fontSize: 12 }}>{a.appDescription}</p>
-          </div>
-          <div style={{ marginTop: 6 }}>
-            <span style={{ fontWeight: 700 }}>🎖️ Role:</span> {a.role}
-          </div>
+          {a.description && (
+            <p style={{ margin: "8px 0 0", fontSize: 12 }}>{a.description}</p>
+          )}
+          {a.app && (
+            <div style={{ marginTop: 8 }}>
+              <span style={{ fontWeight: 700 }}>💾 App:</span> {a.app}
+              <p style={{ margin: "2px 0 0", fontSize: 12 }}>{a.appDescription}</p>
+            </div>
+          )}
+          {a.role && (
+            <div style={{ marginTop: 6 }}>
+              <span style={{ fontWeight: 700 }}>🎖️ Role:</span> {a.role}
+            </div>
+          )}
 
           {a.video && (
             <div style={{ marginTop: 8 }}>

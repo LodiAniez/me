@@ -157,9 +157,10 @@ export interface Achievement {
   title: string;
   event: string;
   icon: string;
-  app: string;
-  appDescription: string;
-  role: string;
+  description?: string;
+  app?: string;
+  appDescription?: string;
+  role?: string;
   video?: string;
   images?: { src: string; caption: string }[];
 }
@@ -180,6 +181,14 @@ export const achievements: Achievement[] = [
       { src: raketComparison, caption: "Why Raket wins" },
       { src: raketInvoice, caption: "AI invoice (parsed by Gemini)" },
     ],
+  },
+  {
+    title: "3× Java Programming Champion",
+    event: "WMSU IT Summit (2016 – 2018)",
+    icon: "🥇",
+    description:
+      "A grand-slam three-peat — champion for three consecutive years in the Java programming competition.",
+    role: "Led WMSU-ESU Molave to three straight IT Summit programming titles.",
   },
 ];
 

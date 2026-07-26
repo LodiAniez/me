@@ -125,7 +125,7 @@ const MyComputerWindow: FC = () => (
       </div>
       <div className="bevel-in" style={{ background: "#fff", padding: 8, fontSize: 12, fontFamily: "monospace" }}>
         <div>System: DexterOS 95</div>
-        <div>CPU: Fullstack Engine @ 6.0 yrs</div>
+        <div>CPU: Fullstack Engine @ 7.0 yrs</div>
         <div>Stack: React · Node · NestJS · SQL</div>
         <div>Status: Available for hire ✔</div>
       </div>

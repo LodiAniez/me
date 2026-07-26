@@ -36,7 +36,7 @@ export const aboutParagraphs = [
 ];
 
 export const stats = [
-  { number: "6+", label: "Years Experience" },
+  { number: "7+", label: "Years Experience" },
   { number: "50+", label: "Happy Clients" },
   { number: "100+", label: "Projects Done" },
   { number: "3", label: "Awards" },

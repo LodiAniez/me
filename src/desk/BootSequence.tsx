@@ -4,7 +4,7 @@ const LINES = [
   "DexterOS BIOS v9.5  (C) 1998 Aniez Systems",
   "",
   "Detecting CPU ... Fullstack Engine  [OK]",
-  "Memory Test : 6+ years experience .... OK",
+  "Memory Test : 7+ years experience .... OK",
   "Detecting drives ...",
   "  A:  RESUME.DSK        [ready]",
   "  B:  PROJECTS.DSK      [ready]",

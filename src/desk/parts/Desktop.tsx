@@ -26,6 +26,7 @@ export default function Desktop({ onShutDown }: DesktopProps) {
             x={w.x}
             y={w.y}
             active={w.z === topZ}
+            maximized={w.maximized}
             width={meta.width}
             height={meta.height}
             menubar={meta.menubar}

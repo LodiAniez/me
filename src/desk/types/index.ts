@@ -7,6 +7,7 @@ export interface WinState {
   id: string;
   z: number;
   minimized: boolean;
+  maximized: boolean;
   x: number;
   y: number;
 }
@@ -68,6 +69,7 @@ export interface WindowProps {
   x: number;
   y: number;
   active: boolean;
+  maximized: boolean;
   width: number;
   height: number;
   menubar?: boolean;

@@ -18,6 +18,7 @@ type Action =
   | { type: "close"; id: string }
   | { type: "focus"; id: string }
   | { type: "minimize"; id: string }
+  | { type: "maximize"; id: string }
   | { type: "toggle"; id: string }
   | { type: "move"; id: string; x: number; y: number };
 
@@ -42,7 +43,7 @@ function reducer(state: OSState, action: Action): OSState {
         openedCount: state.openedCount + 1,
         windows: [
           ...state.windows,
-          { id: action.id, z, minimized: false, x: 24 + offset, y: 18 + offset },
+          { id: action.id, z, minimized: false, maximized: false, x: 24 + offset, y: 18 + offset },
         ],
       };
     }
@@ -65,6 +66,16 @@ function reducer(state: OSState, action: Action): OSState {
           w.id === action.id ? { ...w, minimized: true } : w
         ),
       };
+    case "maximize": {
+      const z = state.topZ + 1;
+      return {
+        ...state,
+        topZ: z,
+        windows: state.windows.map((w) =>
+          w.id === action.id ? { ...w, maximized: !w.maximized, z } : w
+        ),
+      };
+    }
     case "toggle": {
       const win = state.windows.find((w) => w.id === action.id);
       if (!win) return state;
@@ -110,6 +121,7 @@ interface OSContextValue {
   close: (id: string) => void;
   focus: (id: string) => void;
   minimize: (id: string) => void;
+  maximize: (id: string) => void;
   toggle: (id: string) => void;
   move: (id: string, x: number, y: number) => void;
 }
@@ -131,6 +143,7 @@ export function OSProvider({ children }: { children: ReactNode }) {
       close: (id) => dispatch({ type: "close", id }),
       focus: (id) => dispatch({ type: "focus", id }),
       minimize: (id) => dispatch({ type: "minimize", id }),
+      maximize: (id) => dispatch({ type: "maximize", id }),
       toggle: (id) => dispatch({ type: "toggle", id }),
       move: (id, x, y) => dispatch({ type: "move", id, x, y }),
     }),

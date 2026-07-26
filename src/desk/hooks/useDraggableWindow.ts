@@ -2,13 +2,14 @@ import { useRef } from "react";
 import { useOS } from "./useOSStore";
 
 // Pointer-drag behaviour for a window's title bar, clamped to the desktop.
-export function useDraggableWindow(id: string, x: number, y: number) {
+// Dragging is disabled while the window is maximized.
+export function useDraggableWindow(id: string, x: number, y: number, disabled = false) {
   const { focus, move } = useOS();
   const drag = useRef<{ dx: number; dy: number } | null>(null);
   const winRef = useRef<HTMLDivElement>(null);
 
   const onDragStart = (e: React.PointerEvent) => {
-    if ((e.target as HTMLElement).closest(".tctl")) return;
+    if (disabled || (e.target as HTMLElement).closest(".tctl")) return;
     focus(id);
     drag.current = { dx: e.clientX - x, dy: e.clientY - y };
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);

@@ -1,5 +1,6 @@
 import { useOS } from "../hooks/useOSStore";
 import { useDraggableWindow } from "../hooks/useDraggableWindow";
+import type { CSSProperties } from "react";
 import type { WindowProps } from "../types";
 
 export default function Window({
@@ -10,26 +11,36 @@ export default function Window({
   x,
   y,
   active,
+  maximized,
   width,
   height,
   menubar = true,
   statusbar,
   children,
 }: WindowProps) {
-  const { focus, close, minimize } = useOS();
-  const { winRef, onDragStart, onDragMove, onDragEnd } = useDraggableWindow(id, x, y);
+  const { focus, close, minimize, maximize } = useOS();
+  const { winRef, onDragStart, onDragMove, onDragEnd } = useDraggableWindow(
+    id,
+    x,
+    y,
+    maximized
+  );
 
-  return (
-    <div
-      ref={winRef}
-      className="window"
-      style={{
+  const style: CSSProperties = maximized
+    ? { left: 0, top: 0, zIndex: z, width: "100%", height: "calc(100% - 30px)" }
+    : {
         left: x,
         top: y,
         zIndex: z,
         width: `min(${width}px, 96%)`,
         height: `min(${height}px, 88%)`,
-      }}
+      };
+
+  return (
+    <div
+      ref={winRef}
+      className="window"
+      style={style}
       onPointerDown={() => focus(id)}
     >
       <div
@@ -37,13 +48,20 @@ export default function Window({
         onPointerDown={onDragStart}
         onPointerMove={onDragMove}
         onPointerUp={onDragEnd}
-        onDoubleClick={() => minimize(id)}
+        onDoubleClick={() => maximize(id)}
       >
         <span className="title-bar-icon">{icon}</span>
         <span className="title-bar-text">{title}</span>
         <div className="title-controls">
           <button className="tctl" title="Minimize" onClick={() => minimize(id)}>
             _
+          </button>
+          <button
+            className="tctl"
+            title={maximized ? "Restore" : "Maximize"}
+            onClick={() => maximize(id)}
+          >
+            {maximized ? "❐" : "□"}
           </button>
           <button className="tctl" title="Close" onClick={() => close(id)}>
             ×

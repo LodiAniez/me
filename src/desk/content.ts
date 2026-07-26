@@ -162,6 +162,13 @@ export const experience = [
     description:
       "Influenced ongoing designs, standards and methods across website, intranet and application projects. Helped plan technical solutions with PMs, led knowledge-sharing sessions, maintained complete documentation, and wrote clean, sustainable web applications.",
   },
+  {
+    year: "2019 - 2024",
+    title: "Freelance Fullstack Developer",
+    company: "Virtual Champions (Dubai)",
+    description:
+      "Enhanced depot management applications for a Dubai startup. Developed new features, fixed bugs, and optimized performance while maintaining direct client communication to deliver efficient digital solutions.",
+  },
 ];
 
 export const achievements: Achievement[] = [

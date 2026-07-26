@@ -3,6 +3,7 @@ import "./desk.css";
 import { OSProvider, useOS } from "./os-store";
 import Desktop from "./Desktop";
 import BootSequence from "./BootSequence";
+import Notebook from "./Notebook";
 import { profile } from "./content";
 
 type Phase = "boot" | "on" | "off";
@@ -41,6 +42,7 @@ function Prop({
 function SceneInner() {
   const { open } = useOS();
   const [phase, setPhase] = useState<Phase>("boot");
+  const [notebookOpen, setNotebookOpen] = useState(false);
 
   const openApp = (id: string) => {
     if (phase !== "on") setPhase("on");
@@ -206,9 +208,9 @@ function SceneInner() {
 
       <Prop
         style={{ right: "15%", bottom: "6%" }}
-        tip="What I do (sketchbook)"
-        label="Sketchbook — services"
-        onOpen={() => openApp("services")}
+        tip="What I do (open notebook)"
+        label="Sketchbook — what I do"
+        onOpen={() => setNotebookOpen(true)}
       >
         <div className="sketchbook">
           <div className="doodle">✏️</div>
@@ -269,6 +271,8 @@ function SceneInner() {
 
       {/* Warm room lighting on top for cohesion */}
       <div className="room-warm" />
+
+      {notebookOpen && <Notebook onClose={() => setNotebookOpen(false)} />}
     </div>
   );
 }

@@ -16,13 +16,7 @@ const DESKTOP_ICONS: Array<{ id: string; label: string }> = [
   { id: "readme", label: "readme.txt" },
 ];
 
-export default function Desktop({
-  onShutDown,
-  onOpenReadme,
-}: {
-  onShutDown: () => void;
-  onOpenReadme: () => void;
-}) {
+export default function Desktop({ onShutDown }: { onShutDown: () => void }) {
   const { windows, topZ, open } = useOS();
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -40,7 +34,7 @@ export default function Desktop({
             key={ic.id}
             className={`dicon${selected === ic.id ? " selected" : ""}`}
             onClick={() => setSelected(ic.id)}
-            onDoubleClick={() => (ic.id === "readme" ? onOpenReadme() : open(ic.id))}
+            onDoubleClick={() => open(ic.id)}
           >
             <span className="dicon-glyph">{REGISTRY[ic.id].icon}</span>
             <span className="dicon-label">{ic.label}</span>

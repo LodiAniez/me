@@ -1168,7 +1168,7 @@
 .nb-stats b { color: #c0392b; }
 .nb-sign { text-align: right; font-size: 15px; color: #2b466f; margin-top: 12px; }
 
-/* Zoomed-in Notepad (readme.txt) overlay */
+/* Generic zoom overlay (dim backdrop) */
 .zoom-overlay {
   position: fixed;
   inset: 0;
@@ -1180,18 +1180,43 @@
   background: rgba(6, 10, 18, 0.72);
   backdrop-filter: blur(3px);
 }
-.zoom-notepad {
-  position: relative !important;
-  left: auto;
-  top: auto;
-  width: min(90vw, 620px);
-  max-height: 86vh;
+
+/* Zoomed-in sticky note (Contact me) */
+.zoom-sticky {
+  position: relative;
+  width: min(90vw, 460px);
+  padding: 30px 32px 34px;
+  background: #fff59a;
+  color: #5a4a00;
+  font-family: "Comic Sans MS", "Segoe Print", cursive;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+  transform: rotate(-2deg);
   animation: nb-open 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.25);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
 }
-.zoom-body {
-  font-size: 15px;
-  line-height: 1.8;
+.zoom-sticky h2 { font-size: 24px; margin: 0 0 10px; color: #4a3a00; }
+.zoom-sticky > p { font-size: 14px; margin: 0 0 16px; }
+.zoom-sticky a { color: #7a5a00; }
+.sticky-lines { font-size: 15px; line-height: 2; }
+.sticky-lines a { text-decoration: underline; }
+.sticky-socials {
+  margin-top: 16px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 14px;
 }
-.zoom-body h2 { font-size: 19px; margin: 0 0 10px; }
-.zoom-body ul { line-height: 1.9; }
+.sticky-socials a { text-decoration: underline; }
+.sticky-foot { margin-top: 18px; font-size: 12px; opacity: 0.7; }
+.sticky-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: "Comic Sans MS", cursive;
+  font-size: 16px;
+  color: #5a4a00;
+}

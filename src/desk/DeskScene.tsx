@@ -4,7 +4,7 @@ import { OSProvider, useOS } from "./os-store";
 import Desktop from "./Desktop";
 import BootSequence from "./BootSequence";
 import Notebook from "./Notebook";
-import NotepadZoom from "./NotepadZoom";
+import StickyZoom from "./StickyZoom";
 import { profile } from "./content";
 
 type Phase = "boot" | "on" | "off";
@@ -44,7 +44,7 @@ function SceneInner() {
   const { open } = useOS();
   const [phase, setPhase] = useState<Phase>("boot");
   const [notebookPage, setNotebookPage] = useState<number | null>(null);
-  const [notepadOpen, setNotepadOpen] = useState(false);
+  const [stickyOpen, setStickyOpen] = useState(false);
 
   const openApp = (id: string) => {
     if (phase !== "on") setPhase("on");
@@ -87,14 +87,14 @@ function SceneInner() {
         <div className="screen-bezel">
           <div className="screen">
             {phase === "boot" && (
-              <BootSequence onDone={() => setPhase("on")} />
-            )}
-            {phase === "on" && (
-              <Desktop
-                onShutDown={() => setPhase("off")}
-                onOpenReadme={() => setNotepadOpen(true)}
+              <BootSequence
+                onDone={() => {
+                  setPhase("on");
+                  open("readme");
+                }}
               />
             )}
+            {phase === "on" && <Desktop onShutDown={() => setPhase("off")} />}
             {phase === "off" && (
               <div className="crt-off" onClick={() => setPhase("boot")}>
                 It's now safe to turn off your computer.
@@ -162,9 +162,9 @@ function SceneInner() {
       {/* Desk props */}
       <Prop
         style={{ left: "3%", top: "31%" }}
-        tip="Ping me!"
+        tip="Contact me (zoom in)"
         label="Sticky note — contact"
-        onOpen={() => openApp("contact")}
+        onOpen={() => setStickyOpen(true)}
         className="sticky-wrap"
       >
         <div className="sticky">
@@ -275,7 +275,7 @@ function SceneInner() {
         <Notebook initialPage={notebookPage} onClose={() => setNotebookPage(null)} />
       )}
 
-      {notepadOpen && <NotepadZoom onClose={() => setNotepadOpen(false)} />}
+      {stickyOpen && <StickyZoom onClose={() => setStickyOpen(false)} />}
     </div>
   );
 }

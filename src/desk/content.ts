@@ -107,53 +107,60 @@ export const education = [
 
 export const experience = [
   {
-    year: "Sep 2019 - May 2021",
-    title: "Fullstack Developer",
-    company: "VirtualBiznest, Cebu",
+    year: "Jul 2025 - Current",
+    title: "Software Engineer II",
+    company: "Me&u, Remote",
     description:
-      "Built complete web applications for corporate clients and startups. Developed frontend/backend systems, managed VPS deployments, and collaborated in a 3-person team to deliver custom digital solutions from concept to production.",
+      "Develop robust, scalable, modular and API-centric infrastructure and databases for web applications. Coordinate with engineers and management on application design and progress, author code fixes and enhancements, and write and execute test plans to ship highly available products.",
   },
   {
-    year: "May 2021 - Aug 2021",
-    title: "Fullstack Developer",
-    company: "iPay Center, Pagadian",
+    year: "Feb 2025 - Jul 2025",
+    title: "Technical Lead Software Developer",
+    company: "The Camp Connection, Remote",
     description:
-      "Led fullstack development building a bill payment platform with API integrations. Managed a 3-person team, architected scalable systems, and handled the complete development lifecycle including cloud VPS deployment.",
+      "Led development across the systems lifecycle, from requirement gathering to production releases. Translated customer requirements into use cases, designed customized solutions, built desktop and mobile software, modernized legacy code, and supervised programmers and designers against targets.",
   },
   {
-    year: "Aug 2021 - Mar 2022",
-    title: "Fullstack Developer",
-    company: "JCurve Solutions, Singapore",
+    year: "Aug 2024 - Feb 2025",
+    title: "Lead Full Stack Developer",
+    company: "Collabera Digital Philippines, Remote",
     description:
-      "Enhanced enterprise web applications for Australian clients. Implemented new features, optimized performance, and collaborated with cross-functional teams to deliver quality solutions that met evolving business requirements.",
-  },
-  {
-    year: "Mar 2022 - Jun 2022",
-    title: "Lead Fullstack Developer",
-    company: "Molave Young's Milling Corporation",
-    description:
-      "Solo developer responsible for end-to-end development of automation solutions. Architected, developed, tested, and deployed mobile/web applications to streamline manual business processes, reporting directly to management.",
+      "Led a full-stack team through code reviews, mentoring, and sprint planning to deliver high-quality software on time. Designed APIs with back-end developers, wrote unit tests for automation, and managed SQL/NoSQL databases with Node.js and ORMs.",
   },
   {
     year: "Jul 2022 - Aug 2024",
-    title: "Lead Fullstack Developer",
-    company: "Sun Asterisk Corporation, Cebu",
+    title: "Full Stack Developer",
+    company: "Sun* Corp, Remote",
     description:
-      "Led development teams building and enhancing software for Japanese clients. Managed fullstack development, code reviews, and mentored junior developers while coordinating project planning with stakeholders.",
+      "Built new, efficient and well-tested code across a variety of software projects. Amended existing software to upgrade interfaces and elevate performance, troubleshot and debugged issues, constructed algorithms and flowcharts, and reported progress weekly.",
   },
   {
-    year: "2019 - 2024",
-    title: "Freelance Fullstack Developer",
-    company: "Virtual Champions (Dubai)",
+    year: "Mar 2022 - Jul 2022",
+    title: "Full Stack Developer",
+    company: "Youngs Milling Corporation, Zamboanga del Sur",
     description:
-      "Enhanced depot management applications for a Dubai startup. Developed new features, fixed bugs, and optimized performance while maintaining direct client communication to deliver efficient digital solutions.",
+      "Developed efficient, well-tested software and refined it from user feedback. Liaised with departments on technical issues, system design and maintenance, conferred with project managers on scope, and provided weekly progress reports.",
   },
   {
-    year: "Jul 2025 - Present",
-    title: "Software Engineer 2",
-    company: "me&u",
+    year: "Aug 2021 - Mar 2022",
+    title: "Full Stack Developer",
+    company: "JCurve, Remote",
     description:
-      "Building and scaling features for me&u's order-at-table hospitality platform. Crafting polished, responsive frontends and dependable services used across venues, collaborating with cross-functional teams to ship quality at pace.",
+      "Delivered assigned tasks and targets fully remote, and helped lead weekly development and knowledge-sharing sessions. Maintained and improved existing websites and applications and contributed to large multi-developer projects using agile methodology.",
+  },
+  {
+    year: "May 2021 - Aug 2021",
+    title: "Lead Full Stack Developer",
+    company: "iPay Center, Pagadian",
+    description:
+      "Integrated software components and third-party programs to improve accessibility and functionality. Resolved customer queries with clear step-by-step solutions, constructed algorithms and flowcharts, and provided weekly project reports.",
+  },
+  {
+    year: "Sep 2019 - May 2021",
+    title: "Full Stack Developer",
+    company: "VirtualBiznest - Cebu Corp, Cebu",
+    description:
+      "Influenced ongoing designs, standards and methods across website, intranet and application projects. Helped plan technical solutions with PMs, led knowledge-sharing sessions, maintained complete documentation, and wrote clean, sustainable web applications.",
   },
 ];
 

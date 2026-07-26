@@ -381,6 +381,48 @@ const AchievementsWindow: FC = () => (
           <div style={{ marginTop: 6 }}>
             <span style={{ fontWeight: 700 }}>🎖️ Role:</span> {a.role}
           </div>
+
+          {a.video && (
+            <div style={{ marginTop: 8 }}>
+              <a
+                className="link95"
+                href={a.video}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ▶ Watch the demo on YouTube
+              </a>
+            </div>
+          )}
+
+          {a.images && (
+            <div
+              style={{
+                marginTop: 10,
+                display: "grid",
+                gridTemplateColumns: "repeat(2, 1fr)",
+                gap: 8,
+              }}
+            >
+              {a.images.map((img) => (
+                <div
+                  key={img.caption}
+                  className="proj-card"
+                  onClick={() => window.open(img.src, "_blank", "noopener")}
+                  title={img.caption}
+                >
+                  <img
+                    src={img.src}
+                    alt={img.caption}
+                    style={{ height: 90, objectFit: "cover", objectPosition: "top" }}
+                  />
+                  <div className="cap" style={{ fontSize: 10 }}>
+                    {img.caption}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       ))}
     </div>
@@ -399,6 +441,6 @@ export const REGISTRY: Record<string, WinMeta> = {
   resume: { title: "resume.doc - WordPad", icon: "📜", width: 480, height: 460, Component: ResumeWindow },
   projects: { title: "Projects", icon: "📁", width: 500, height: 420, Component: ProjectsWindow },
   guestbook: { title: "Guestbook", icon: "📖", width: 460, height: 420, Component: GuestbookWindow },
-  achievements: { title: "Achievements", icon: "🏆", width: 470, height: 380, Component: AchievementsWindow },
+  achievements: { title: "Achievements", icon: "🏆", width: 480, height: 470, Component: AchievementsWindow },
   contact: { title: "New Message", icon: "✉️", width: 460, height: 430, Component: ContactWindow },
 };

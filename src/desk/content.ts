@@ -11,6 +11,10 @@ import nickoImg from "../assets/nicko.jpeg";
 import kentImg from "../assets/kent.jpeg";
 import alImg from "../assets/al.jpeg";
 import saviImg from "../assets/savi.jpeg";
+import raketHero from "../assets/raket/raket-hero.png";
+import raketLanding from "../assets/raket/raket-landing.png";
+import raketComparison from "../assets/raket/raket-comparison.png";
+import raketInvoice from "../assets/raket/raket-invoice.jpg";
 
 export const RESUME_PDF = resumePDF;
 export const ME_IMG = meImg;
@@ -156,6 +160,8 @@ export interface Achievement {
   app: string;
   appDescription: string;
   role: string;
+  video?: string;
+  images?: { src: string; caption: string }[];
 }
 
 export const achievements: Achievement[] = [
@@ -167,6 +173,13 @@ export const achievements: Achievement[] = [
     appDescription:
       "An app that generates invoices for clients and helps move money across cross-border transactions using Morph.",
     role: "Led a team of 3 developers to build the app during the hackathon.",
+    video: "https://www.youtube.com/watch?v=_xuVocSwaSg",
+    images: [
+      { src: raketHero, caption: "Raket — landing" },
+      { src: raketLanding, caption: "Pitch deck — hero" },
+      { src: raketComparison, caption: "Why Raket wins" },
+      { src: raketInvoice, caption: "AI invoice (parsed by Gemini)" },
+    ],
   },
 ];
 

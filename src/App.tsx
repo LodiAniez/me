@@ -1,7 +1,7 @@
-import DeskScene from "./desk/DeskScene";
+import Desk from "./desk";
 
 function App() {
-  return <DeskScene />;
+  return <Desk />;
 }
 
 export default App;

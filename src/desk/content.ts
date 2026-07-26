@@ -18,6 +18,7 @@ import raketInvoice from "../assets/raket/raket-invoice.jpg";
 import itsummitChampions from "../assets/itsummit/itsummit-champions.jpg";
 import itsummitGroup from "../assets/itsummit/itsummit-group.jpg";
 import itsummitStage from "../assets/itsummit/itsummit-stage.jpg";
+import type { Achievement, Project } from "./types";
 
 export const RESUME_PDF = resumePDF;
 export const ME_IMG = meImg;
@@ -156,18 +157,6 @@ export const experience = [
   },
 ];
 
-export interface Achievement {
-  title: string;
-  event: string;
-  icon: string;
-  description?: string;
-  app?: string;
-  appDescription?: string;
-  role?: string;
-  video?: string;
-  images?: { src: string; caption: string }[];
-}
-
 export const achievements: Achievement[] = [
   {
     title: "Top 10 Finalist",
@@ -215,13 +204,6 @@ export const skills = [
   { name: "Firebase", percentage: 95 },
   { name: "MongoDB", percentage: 95 },
 ];
-
-export interface Project {
-  title: string;
-  category: string;
-  image: string;
-  filename: string;
-}
 
 export const projects: Project[] = [
   { title: "me&u app", category: "Mobile App, Web App", image: meanduImg, filename: "meandu.exe" },

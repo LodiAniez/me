@@ -15,6 +15,9 @@ import raketHero from "../assets/raket/raket-hero.png";
 import raketLanding from "../assets/raket/raket-landing.png";
 import raketComparison from "../assets/raket/raket-comparison.png";
 import raketInvoice from "../assets/raket/raket-invoice.jpg";
+import itsummitChampions from "../assets/itsummit/itsummit-champions.jpg";
+import itsummitGroup from "../assets/itsummit/itsummit-group.jpg";
+import itsummitStage from "../assets/itsummit/itsummit-stage.jpg";
 
 export const RESUME_PDF = resumePDF;
 export const ME_IMG = meImg;
@@ -189,6 +192,11 @@ export const achievements: Achievement[] = [
     description:
       "A grand-slam three-peat — champion for three consecutive years in the Java programming competition.",
     role: "Led WMSU-ESU Molave to three straight IT Summit programming titles.",
+    images: [
+      { src: itsummitChampions, caption: "Champions with the trophy" },
+      { src: itsummitStage, caption: "On stage — Java winners" },
+      { src: itsummitGroup, caption: "WMSU-ESU Molave · 7th IT Summit" },
+    ],
   },
 ];
 

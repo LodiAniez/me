@@ -7,6 +7,11 @@ import {
 } from "react";
 import type { WinState } from "../types";
 
+// On phones the CRT screen is too narrow for cascaded, partially-offscreen
+// windows, so new windows open maximized and flush to the top-left.
+const isSmallScreen = () =>
+  typeof window !== "undefined" && window.innerWidth <= 560;
+
 interface OSState {
   windows: WinState[];
   topZ: number;
@@ -36,6 +41,7 @@ function reducer(state: OSState, action: Action): OSState {
           ),
         };
       }
+      const small = isSmallScreen();
       const offset = (state.openedCount % 6) * 22;
       return {
         ...state,
@@ -43,7 +49,14 @@ function reducer(state: OSState, action: Action): OSState {
         openedCount: state.openedCount + 1,
         windows: [
           ...state.windows,
-          { id: action.id, z, minimized: false, maximized: false, x: 24 + offset, y: 18 + offset },
+          {
+            id: action.id,
+            z,
+            minimized: false,
+            maximized: small,
+            x: small ? 6 : 24 + offset,
+            y: small ? 6 : 18 + offset,
+          },
         ],
       };
     }

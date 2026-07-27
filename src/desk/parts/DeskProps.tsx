@@ -31,6 +31,7 @@ export default function DeskProps({
         tip="Projects"
         label="Projects floppy disk"
         onOpen={() => onOpenApp("projects")}
+        className="prop-projects"
       >
         <div className="floppy">
           <div className="shutter" />
@@ -47,6 +48,7 @@ export default function DeskProps({
         tip="Resume"
         label="Resume floppy disk"
         onOpen={() => onOpenApp("resume")}
+        className="prop-resume"
       >
         <div className="floppy" style={{ background: "#5a2b67" }}>
           <div className="shutter" />
@@ -63,6 +65,7 @@ export default function DeskProps({
         tip="What I do (open notebook)"
         label="Sketchbook — what I do"
         onOpen={() => onOpenNotebook(0)}
+        className="prop-sketch"
       >
         <div className="sketchbook">
           <div className="doodle">✏️</div>

@@ -978,9 +978,10 @@
 .power-btn:hover { filter: brightness(1.08); }
 .power-btn:active { box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4); }
 
-/* Small screens: let windows use most of the CRT, shrink icons */
+/* Tablets / small landscape: let the CRT use most of the width, but still
+   cap by height so it never overflows a short landscape viewport. */
 @media (max-width: 720px) {
-  .monitor { width: 94vw; top: 2%; }
+  .monitor { width: min(94vw, 122vh); top: 2%; }
   .dicon { width: 66px; }
   .dicon-glyph { font-size: 26px; }
   .task-btn { min-width: 46px; }
@@ -989,6 +990,49 @@
   .plant, .mousepad, .cassette, .rotary, .photo-frame, .wall-window {
     display: none;
   }
+}
+
+/* Phones (portrait): the landscape 1.32:1 CRT wastes vertical space and
+   leaves the desktop unusably small, so the monitor goes tall to fill most
+   of the screen, and the interactive props line up along the desk below. */
+@media (max-width: 560px) {
+  .monitor {
+    width: 96vw;
+    top: 2%;
+    aspect-ratio: auto;
+    height: 66vh;
+    padding: 14px 12px 30px;
+    border-radius: 16px;
+  }
+  .screen-bezel { padding: 8px; }
+  .screen-bezel::after,
+  .screen-bezel::before { inset: 8px; }
+  .monitor-brand { bottom: 0.6%; font-size: 10px; }
+
+  /* Reclaim room: drop the decorative desk clutter and the keyboard. */
+  .keyboard,
+  .mug,
+  .nameplate {
+    display: none;
+  }
+
+  /* Shrink the interactive props and line them up along the desk. */
+  .sticky { width: 66px; height: 66px; font-size: 9px; padding: 6px; }
+  .floppy { width: 54px; height: 58px; }
+  .floppy .shutter { width: 26px; height: 20px; }
+  .floppy .label { height: 26px; font-size: 7px; }
+  .sketchbook { width: 66px; height: 52px; }
+  .sketchbook .doodle { font-size: 20px; }
+
+  .prop { bottom: 3% !important; top: auto !important; }
+  .prop.sticky-wrap { left: 2% !important; right: auto !important; }
+  .prop.prop-projects { left: 27% !important; right: auto !important; }
+  .prop.prop-resume { left: 51% !important; right: auto !important; }
+  .prop.prop-sketch { left: auto !important; right: 3% !important; }
+
+  /* Roomier desktop icons/text now that the screen is bigger. */
+  .dicon { width: 70px; }
+  .desktop-icons { gap: 2px 6px; }
 }
 
 /* ============================================================

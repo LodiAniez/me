@@ -18,7 +18,8 @@ import raketInvoice from "../assets/raket/raket-invoice.jpg";
 import itsummitChampions from "../assets/itsummit/itsummit-champions.jpg";
 import itsummitGroup from "../assets/itsummit/itsummit-group.jpg";
 import itsummitStage from "../assets/itsummit/itsummit-stage.jpg";
-import type { Achievement, Project } from "./types";
+import codingameTypescript from "../assets/certifications/codingame-typescript-certification.png";
+import type { Achievement, Certification, Project } from "./types";
 
 export const RESUME_PDF = resumePDF;
 export const ME_IMG = meImg;
@@ -102,6 +103,19 @@ export const education = [
     institution: "Self-taught",
     description:
       "Upskilling through online platforms like Coursera, Udemy, and edX, focusing on web development, fullstack development, and cloud computing.",
+  },
+];
+
+export const certifications: Certification[] = [
+  {
+    year: "Aug 2026",
+    title: "TypeScript Certification — With Honors",
+    issuer: "CodinGame by CoderPad",
+    description:
+      "Recognized as fully capable and skilled in TypeScript problem solving, earning the certification with honors.",
+    credentialId: "10633296",
+    url: "https://www.codingame.com/certification/IoLBWOdOl6b6214DCWfTyQ",
+    image: codingameTypescript,
   },
 ];
 

@@ -51,6 +51,16 @@ export interface Achievement {
   images?: AchievementImage[];
 }
 
+export interface Certification {
+  year: string;
+  title: string;
+  issuer: string;
+  description: string;
+  credentialId?: string;
+  url?: string;
+  image?: string;
+}
+
 /* ---------------- Component props ---------------- */
 export interface PropProps {
   className?: string;

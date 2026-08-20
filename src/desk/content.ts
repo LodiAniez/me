@@ -268,7 +268,7 @@ export const projects: Project[] = [
  *     version: "1.0.0",
  *     platforms: ["Windows", "macOS"],
  *     size: "42 MB",
- *     href: "https://github.com/LodiAniez/me/releases/download/Tag/app.exe",
+ *     href: "https://github.com/LodiAniez/my-apps/releases/download/Tag/app.exe",
  *     repo: "https://github.com/LodiAniez/app-name",
  *   }
  */
@@ -291,9 +291,9 @@ export const apps: DownloadableApp[] = [
       "Notifee exact alarms",
     ],
     version: "1.0.0",
-    platforms: ["Android (arm64)"],
-    size: "41.2 MB",
-    href: "https://github.com/LodiAniez/me/releases/download/ExpenseNagger/expense-nagger.apk",
+    platforms: ["Android"],
+    size: "90.7 MB",
+    href: "https://github.com/LodiAniez/my-apps/releases/download/ExpenseNagger/app-release.apk",
   },
 ];
 
@@ -341,7 +341,7 @@ export function downloadResume() {
 }
 
 /** True for links that point off-site (GitHub Releases, stores, …). */
-export function isExternalHref(href: string) {
+function isExternalHref(href: string) {
   return /^https?:\/\//i.test(href);
 }
 
@@ -354,7 +354,7 @@ export function isExternalHref(href: string) {
  * index.html — but a static host returns a real 404, so only bare paths that
  * are not already based get the prefix.
  */
-export function resolveDownloadHref(href: string) {
+function resolveDownloadHref(href: string) {
   if (isExternalHref(href) || !href.startsWith("/")) return href;
   const base = import.meta.env.BASE_URL;
   if (href.startsWith(base)) return href;

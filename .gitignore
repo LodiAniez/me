@@ -27,3 +27,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# App builds — ship these via GitHub Releases, not the repo
+*.apk
+*.aab

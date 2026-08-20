@@ -20,7 +20,6 @@ import itsummitGroup from "../assets/itsummit/itsummit-group.jpg";
 import itsummitStage from "../assets/itsummit/itsummit-stage.jpg";
 import codingameTypescript from "../assets/certifications/codingame-typescript-certification.png";
 import expenseNaggerLogo from "../assets/apps/expense-nagger/expense-nagger-badger.png";
-import expenseNaggerApk from "../assets/apps/expense-nagger/v1/expense-nagger.apk";
 import type {
   Achievement,
   Certification,
@@ -269,8 +268,7 @@ export const projects: Project[] = [
  *     version: "1.0.0",
  *     platforms: ["Windows", "macOS"],
  *     size: "42 MB",
- *     href: "/downloads/app-name-1.0.0.exe",
- *     filename: "app-name-1.0.0.exe",
+ *     href: "https://github.com/LodiAniez/me/releases/download/Tag/app.exe",
  *     repo: "https://github.com/LodiAniez/app-name",
  *   }
  */
@@ -295,8 +293,7 @@ export const apps: DownloadableApp[] = [
     version: "1.0.0",
     platforms: ["Android (arm64)"],
     size: "41.2 MB",
-    href: expenseNaggerApk,
-    filename: "expense-nagger-v1.apk",
+    href: "https://github.com/LodiAniez/me/releases/download/ExpenseNagger/expense-nagger.apk",
   },
 ];
 

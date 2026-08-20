@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { apps, downloadApp, isExternalHref } from "../../content";
+import { apps, downloadApp } from "../../content";
 
 const AppsWindow: FC = () => (
   <>
@@ -76,7 +76,7 @@ const AppsWindow: FC = () => (
 
               <div className="app-actions">
                 <button className="btn95" onClick={() => downloadApp(a)}>
-                  {isExternalHref(a.href) ? "🔗 Get it" : "⬇ Download"}
+                  ⬇ Download
                 </button>
                 {a.site && (
                   <a

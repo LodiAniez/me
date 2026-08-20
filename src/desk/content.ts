@@ -348,10 +348,20 @@ export function isExternalHref(href: string) {
   return /^https?:\/\//i.test(href);
 }
 
-/** Resolves a `public/` path against the Vite base; leaves other hrefs alone. */
+/**
+ * Resolves a `public/` path against the Vite base; leaves other hrefs alone.
+ *
+ * Assets imported through Vite already carry the base (e.g. "/me/assets/x.apk"),
+ * so prefixing those again yields "/me/me/assets/x.apk". The dev server and
+ * `vite preview` hide that with an SPA fallback — they answer 200 with
+ * index.html — but a static host returns a real 404, so only bare paths that
+ * are not already based get the prefix.
+ */
 export function resolveDownloadHref(href: string) {
   if (isExternalHref(href) || !href.startsWith("/")) return href;
-  return import.meta.env.BASE_URL + href.slice(1);
+  const base = import.meta.env.BASE_URL;
+  if (href.startsWith(base)) return href;
+  return base + href.slice(1);
 }
 
 export function downloadApp(app: DownloadableApp) {

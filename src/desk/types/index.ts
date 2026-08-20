@@ -51,6 +51,35 @@ export interface Achievement {
   images?: AchievementImage[];
 }
 
+export interface DownloadableApp {
+  name: string;
+  /** Emoji shown as the app's icon when no `logo` is supplied. */
+  icon: string;
+  /** Imported image used as the app's icon, preferred over `icon`. */
+  logo?: string;
+  /** Punchy hook shown next to the name. */
+  tagline: string;
+  /** One-liner for the download card. */
+  description: string;
+  /** Longer blurb explaining how the app works. */
+  about?: string;
+  /** Stack, joined with · when rendered. */
+  tech?: string[];
+  version: string;
+  /** e.g. ["Windows", "macOS"] or ["Android"]. */
+  platforms: string[];
+  /** Human-readable download size, e.g. "42 MB". */
+  size: string;
+  /** Download target: a public/ path, an imported asset, or an external URL. */
+  href: string;
+  /** Filename suggested to the browser; omit for external URLs. */
+  filename?: string;
+  /** Optional secondary links. */
+  repo?: string;
+  site?: string;
+  screenshot?: string;
+}
+
 export interface Certification {
   year: string;
   title: string;

@@ -19,7 +19,14 @@ import itsummitChampions from "../assets/itsummit/itsummit-champions.jpg";
 import itsummitGroup from "../assets/itsummit/itsummit-group.jpg";
 import itsummitStage from "../assets/itsummit/itsummit-stage.jpg";
 import codingameTypescript from "../assets/certifications/codingame-typescript-certification.png";
-import type { Achievement, Certification, Project } from "./types";
+import expenseNaggerLogo from "../assets/apps/expense-nagger/expense-nagger-badger.png";
+import expenseNaggerApk from "../assets/apps/expense-nagger/v1/expense-nagger.apk";
+import type {
+  Achievement,
+  Certification,
+  DownloadableApp,
+  Project,
+} from "./types";
 
 export const RESUME_PDF = resumePDF;
 export const ME_IMG = meImg;
@@ -242,6 +249,57 @@ export const projects: Project[] = [
   { title: "Canvas Chat", category: "Widget", image: canvaschatImg, filename: "canvaschat.dll" },
 ];
 
+/**
+ * Apps I built and ship for anyone to download.
+ *
+ * `href` can be:
+ *   - a file dropped in `public/downloads/` → "/downloads/my-app-1.0.0.exe"
+ *     (paths are prefixed with the Vite base at render time)
+ *   - an imported asset → import it at the top of this file and use the binding
+ *   - an external URL (GitHub Releases, Play Store, …) → opens in a new tab
+ *
+ * Template for a new entry:
+ *   {
+ *     name: "App Name",
+ *     icon: "💾",
+ *     tagline: "One-line pitch.",
+ *     description: "What it does and who it's for.",
+ *     about: "Longer blurb — how it works, what makes it different.",
+ *     tech: ["React Native", "TypeScript"],
+ *     version: "1.0.0",
+ *     platforms: ["Windows", "macOS"],
+ *     size: "42 MB",
+ *     href: "/downloads/app-name-1.0.0.exe",
+ *     filename: "app-name-1.0.0.exe",
+ *     repo: "https://github.com/LodiAniez/app-name",
+ *   }
+ */
+export const apps: DownloadableApp[] = [
+  {
+    name: "Expense Nagger",
+    icon: "\ud83e\udda1",
+    logo: expenseNaggerLogo,
+    tagline: "A budget tracker that insults you when you overspend.",
+    description:
+      "An offline Android expense tracker with a badger that turns up in the corner and gets nastier the further past your limit you go.",
+    about:
+      "Expense Nagger is a personal budgeting app built around a simple idea: a polite reminder has never once stopped anyone from overspending. Set a budget and a spending limit for your cycle, log what you spend \u2014 by hand or by scanning a receipt \u2014 and stay under it. Go over and a badger appears, shaking and shouting, escalating through four grades of anger as the overage widens. It also nags you every morning until you fix it. Everything runs on the device: no account, no server, no data leaving your phone.",
+    tech: [
+      "React Native",
+      "Expo SDK 57",
+      "TypeScript",
+      "SQLite (Drizzle ORM)",
+      "on-device ML Kit OCR",
+      "Notifee exact alarms",
+    ],
+    version: "1.0.0",
+    platforms: ["Android (arm64)"],
+    size: "41.2 MB",
+    href: expenseNaggerApk,
+    filename: "expense-nagger-v1.apk",
+  },
+];
+
 export const testimonials = [
   {
     name: "Nicko Balboa",
@@ -280,6 +338,31 @@ export function downloadResume() {
   const link = document.createElement("a");
   link.href = resumePDF;
   link.download = "Dexter_Louie_Aniez_Resume.pdf";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+/** True for links that point off-site (GitHub Releases, stores, …). */
+export function isExternalHref(href: string) {
+  return /^https?:\/\//i.test(href);
+}
+
+/** Resolves a `public/` path against the Vite base; leaves other hrefs alone. */
+export function resolveDownloadHref(href: string) {
+  if (isExternalHref(href) || !href.startsWith("/")) return href;
+  return import.meta.env.BASE_URL + href.slice(1);
+}
+
+export function downloadApp(app: DownloadableApp) {
+  const href = resolveDownloadHref(app.href);
+  if (isExternalHref(href)) {
+    window.open(href, "_blank", "noopener");
+    return;
+  }
+  const link = document.createElement("a");
+  link.href = href;
+  link.download = app.filename ?? "";
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

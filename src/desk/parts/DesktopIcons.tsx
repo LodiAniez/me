@@ -7,6 +7,7 @@ const DESKTOP_ICONS: MenuItem[] = [
   { id: "mycomputer", label: "My Computer" },
   { id: "about", label: "About Me" },
   { id: "projects", label: "Projects" },
+  { id: "apps", label: "My Apps" },
   { id: "resume", label: "Resume" },
   { id: "services", label: "What I Do" },
   { id: "guestbook", label: "Guestbook" },

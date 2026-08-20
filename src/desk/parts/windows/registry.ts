@@ -8,6 +8,7 @@ import ProjectsWindow from "./ProjectsWindow";
 import GuestbookWindow from "./GuestbookWindow";
 import AchievementsWindow from "./AchievementsWindow";
 import ContactWindow from "./ContactWindow";
+import AppsWindow from "./AppsWindow";
 
 export const REGISTRY: Record<string, WinMeta> = {
   readme: { title: "readme.txt - Notepad", icon: "📝", width: 420, height: 320, Component: ReadmeWindow },
@@ -18,5 +19,6 @@ export const REGISTRY: Record<string, WinMeta> = {
   projects: { title: "Projects", icon: "📁", width: 500, height: 420, Component: ProjectsWindow },
   guestbook: { title: "Guestbook", icon: "📖", width: 460, height: 420, Component: GuestbookWindow },
   achievements: { title: "Achievements", icon: "🏆", width: 480, height: 470, Component: AchievementsWindow },
+  apps: { title: "My Apps — Downloads", icon: "💾", width: 500, height: 440, Component: AppsWindow },
   contact: { title: "New Message", icon: "✉️", width: 460, height: 430, Component: ContactWindow },
 };

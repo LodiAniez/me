@@ -509,6 +509,23 @@
 }
 .proj-card .cap { font-size: 12px; margin-top: 3px; }
 .proj-card .cap b { color: #000080; }
+.app-list { display: flex; flex-direction: column; gap: 10px; }
+.app-card { background: #fff; padding: 10px; }
+.app-head { display: flex; align-items: center; gap: 8px; }
+.app-icon { font-size: 28px; line-height: 1; flex: none; }
+.app-logo {
+  width: 44px; height: 44px; flex: none; object-fit: contain; background: #fff;
+  border: 2px solid; border-color: var(--w95-sh) var(--w95-hl) var(--w95-hl) var(--w95-sh);
+}
+.app-lead { font-size: 12px; font-weight: 700; margin: 8px 0 0; }
+.app-about { font-size: 12px; margin: 6px 0 0; color: #222; }
+.app-tech { font-size: 11px; margin-top: 8px; color: #444; }
+.app-meta { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+.app-tag {
+  font-size: 10px; padding: 1px 5px; background: var(--w95-face); color: #000;
+  border: 2px solid; border-color: var(--w95-hl) var(--w95-sh) var(--w95-sh) var(--w95-hl);
+}
+.app-actions { display: flex; align-items: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
 .testi-card { margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px dotted #999; }
 .testi-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
 .testi-head img { width: 34px; height: 34px; object-fit: cover;
@@ -987,6 +1004,8 @@
   .task-btn { min-width: 46px; }
   .task-btn .lbl { display: none; }
   .proj-grid { grid-template-columns: 1fr; }
+  .app-icon { font-size: 24px; }
+  .app-logo { width: 36px; height: 36px; }
   .plant, .mousepad, .cassette, .rotary, .photo-frame, .wall-window {
     display: none;
   }
@@ -1032,7 +1051,8 @@
 
   /* Roomier desktop icons/text now that the screen is bigger. */
   .dicon { width: 70px; }
-  .desktop-icons { gap: 2px 6px; }
+  /* Taller icon columns so the 10th icon doesn't push a 4th column off-screen. */
+  .desktop-icons { gap: 2px 6px; grid-template-rows: repeat(4, min-content); }
 }
 
 /* ============================================================

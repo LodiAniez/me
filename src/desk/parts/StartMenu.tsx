@@ -5,6 +5,7 @@ const START_ITEMS: MenuItem[] = [
   { id: "about", label: "About Me" },
   { id: "resume", label: "Resume" },
   { id: "projects", label: "Projects" },
+  { id: "apps", label: "My Apps" },
   { id: "services", label: "What I Do" },
   { id: "achievements", label: "Achievements" },
   { id: "guestbook", label: "Guestbook" },

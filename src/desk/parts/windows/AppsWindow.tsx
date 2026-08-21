@@ -58,7 +58,21 @@ const AppsWindow: FC = () => (
               )}
 
               <p className="app-lead">{a.description}</p>
-              {a.about && <p className="app-about">{a.about}</p>}
+              {a.about?.map((para) => (
+                <p key={para.slice(0, 40)} className="app-about">
+                  {para}
+                </p>
+              ))}
+              {a.highlights && (
+                <div className="app-highlights">
+                  <b>Under the hood</b>
+                  <ul>
+                    {a.highlights.map((h) => (
+                      <li key={h.slice(0, 40)}>{h}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               {a.tech && (
                 <div className="app-tech">
                   <b>Built with:</b> {a.tech.join(" \u00b7 ")}

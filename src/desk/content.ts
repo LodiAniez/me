@@ -20,6 +20,7 @@ import itsummitGroup from "../assets/itsummit/itsummit-group.jpg";
 import itsummitStage from "../assets/itsummit/itsummit-stage.jpg";
 import codingameTypescript from "../assets/certifications/codingame-typescript-certification.png";
 import expenseNaggerLogo from "../assets/apps/expense-nagger/expense-nagger-badger.png";
+import decksterLogo from "../assets/apps/deckster/icon.png";
 import type {
   Achievement,
   Certification,
@@ -248,6 +249,17 @@ export const projects: Project[] = [
   { title: "Canvas Chat", category: "Widget", image: canvaschatImg, filename: "canvaschat.dll" },
 ];
 
+/** Sideloaded APKs all trip the same Play Protect block, so share one note. */
+const PLAY_PROTECT_INSTALL = {
+  note: "Android's Play Protect blocks apps from unverified developers, so it will refuse this one until you let it through.",
+  steps: [
+    "Play Store \u2192 your profile \u2192 Play Protect \u2192 \u2699\ufe0f",
+    'Turn off "Scan apps with Play Protect"',
+    "Open the downloaded .apk and install it",
+    "Turn Play Protect back on",
+  ],
+};
+
 /**
  * Apps I built and ship for anyone to download.
  *
@@ -263,7 +275,8 @@ export const projects: Project[] = [
  *     icon: "💾",
  *     tagline: "One-line pitch.",
  *     description: "What it does and who it's for.",
- *     about: "Longer blurb — how it works, what makes it different.",
+ *     about: ["Longer blurb — how it works.", "A second paragraph."],
+ *     highlights: ["Notable engineering detail."],
  *     tech: ["React Native", "TypeScript"],
  *     version: "1.0.0",
  *     platforms: ["Windows", "macOS"],
@@ -275,14 +288,48 @@ export const projects: Project[] = [
  */
 export const apps: DownloadableApp[] = [
   {
+    name: "Deckster",
+    icon: "\ud83c\udccf",
+    logo: decksterLogo,
+    tagline: "Offline multiplayer quiz races for people in the same room.",
+    description:
+      "A quiz game for friends sitting together, played entirely offline. One phone opens a hotspot and becomes the server; everyone else joins and races through the same questions, with no internet, no accounts, and no backend.",
+    about: [
+      "Deckster turns a group of phones into a self-contained game. The host's device runs a Wi-Fi hotspot, a TCP game server, and the authoritative game state; other phones discover the room by UDP broadcast and connect directly to it. Nothing leaves the room and nothing is stored on a server \u2014 there isn't one. Medals, honours, and every answer land at once when the round finishes.",
+      "It ships with 4,468 questions across 24 categories, bundled at build time so the game never needs a connection. Hosts can also bring their own: a companion web app builds a question deck, validates it, and exports a .json the phone reads for a single round.",
+      "Up to eight players. 5\u201315 seconds a question. 529 tests.",
+    ],
+    highlights: [
+      "Peer-to-peer over raw sockets. Game state travels as newline-delimited JSON over TCP; rooms announce themselves over UDP broadcast, which finds every lobby on a network in about two seconds without knowing a single address in advance.",
+      "A pure reducer as the game engine. (state, event) => state, with per-player projections that withhold the correct answer until the round ends \u2014 the server cannot leak what it never sends.",
+      "Ports and adapters throughout. Every native dependency sits behind a small interface, so the transport, discovery, and file import are tested against fakes with no device involved.",
+    ],
+    tech: [
+      "React Native",
+      "Expo SDK 57",
+      "TypeScript (strict)",
+      "React 19",
+      "Vite",
+      "TCP & UDP sockets",
+      "Jest",
+      "React Native Testing Library",
+    ],
+    version: "1.0.0",
+    platforms: ["Android"],
+    size: "70.7 MB",
+    href: "https://github.com/LodiAniez/my-apps/releases/download/deckster-v1.0.0/deckster-v1.0.0.apk",
+    install: PLAY_PROTECT_INSTALL,
+  },
+  {
     name: "Expense Nagger",
     icon: "\ud83e\udda1",
     logo: expenseNaggerLogo,
     tagline: "A budget tracker that insults you when you overspend.",
     description:
       "An offline Android expense tracker with a badger that turns up in the corner and gets nastier the further past your limit you go.",
-    about:
+    about: [
       "Expense Nagger is a personal budgeting app built around a simple idea: a polite reminder has never once stopped anyone from overspending. Set a budget and a spending limit for your cycle, log what you spend \u2014 by hand or by scanning a receipt \u2014 and stay under it. Go over and a badger appears, shaking and shouting, escalating through four grades of anger as the overage widens. It also nags you every morning until you fix it. Everything runs on the device: no account, no server, no data leaving your phone.",
+    ],
     tech: [
       "React Native",
       "Expo SDK 57",
@@ -295,17 +342,10 @@ export const apps: DownloadableApp[] = [
     platforms: ["Android"],
     size: "90.7 MB",
     href: "https://github.com/LodiAniez/my-apps/releases/download/ExpenseNagger/expense-nagger.apk",
-    install: {
-      note: "Android's Play Protect blocks apps from unverified developers, so it will refuse this one until you let it through.",
-      steps: [
-        "Play Store \u2192 your profile \u2192 Play Protect \u2192 \u2699\ufe0f",
-        'Turn off "Scan apps with Play Protect"',
-        "Open the downloaded .apk and install it",
-        "Turn Play Protect back on",
-      ],
-    },
+    install: PLAY_PROTECT_INSTALL,
   },
 ];
+
 
 export const testimonials = [
   {

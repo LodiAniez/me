@@ -61,8 +61,10 @@ export interface DownloadableApp {
   tagline: string;
   /** One-liner for the download card. */
   description: string;
-  /** Longer blurb explaining how the app works. */
-  about?: string;
+  /** Longer blurb explaining how the app works, one string per paragraph. */
+  about?: string[];
+  /** Notable engineering details, rendered as a bulleted list. */
+  highlights?: string[];
   /** Stack, joined with · when rendered. */
   tech?: string[];
   version: string;

@@ -520,6 +520,10 @@
 .app-lead { font-size: 12px; font-weight: 700; margin: 8px 0 0; }
 .app-about { font-size: 12px; margin: 6px 0 0; color: #222; }
 .app-tech { font-size: 11px; margin-top: 8px; color: #444; }
+.app-highlights { margin-top: 10px; font-size: 11px; }
+/* Tailwind preflight strips list markers; restore them for these bullets. */
+.app-highlights ul { margin: 4px 0 0; padding-left: 18px; list-style: disc; }
+.app-highlights li { margin-bottom: 4px; }
 .app-meta { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
 .app-tag {
   font-size: 10px; padding: 1px 5px; background: var(--w95-face); color: #000;

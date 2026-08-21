@@ -31,3 +31,6 @@ dist-ssr
 # App builds — ship these via GitHub Releases, not the repo
 *.apk
 *.aab
+
+# TypeScript incremental build cache — machine-local
+*.tsbuildinfo

@@ -371,15 +371,23 @@ function resolveDownloadHref(href: string) {
   return base + href.slice(1);
 }
 
+/**
+ * Starts the download in place — no new tab.
+ *
+ * Release assets are served with Content-Disposition: attachment, so a
+ * same-tab anchor click hands the file to the browser without navigating the
+ * page away. Opening a tab instead would flash an empty window, and would
+ * strand the visitor on a GitHub 404 page whenever an asset gets renamed.
+ *
+ * `download` only renames same-origin files; cross-origin it is ignored and
+ * the server's filename wins.
+ */
 export function downloadApp(app: DownloadableApp) {
   const href = resolveDownloadHref(app.href);
-  if (isExternalHref(href)) {
-    window.open(href, "_blank", "noopener");
-    return;
-  }
   const link = document.createElement("a");
   link.href = href;
-  link.download = app.filename ?? "";
+  link.rel = "noopener";
+  if (app.filename) link.download = app.filename;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

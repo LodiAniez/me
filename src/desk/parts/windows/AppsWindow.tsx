@@ -99,6 +99,21 @@ const AppsWindow: FC = () => (
                   </a>
                 )}
               </div>
+
+              {a.install && (
+                <div className="app-install">
+                  <div className="app-install-head">
+                    <span>⚠️</span>
+                    <b>Before you install</b>
+                  </div>
+                  <p>{a.install.note}</p>
+                  <ol>
+                    {a.install.steps.map((step) => (
+                      <li key={step}>{step}</li>
+                    ))}
+                  </ol>
+                </div>
+              )}
             </div>
           ))}
         </div>

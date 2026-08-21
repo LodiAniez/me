@@ -74,6 +74,8 @@ export interface DownloadableApp {
   href: string;
   /** Filename suggested to the browser; omit for external URLs. */
   filename?: string;
+  /** Install caveat shown under the download button, e.g. Play Protect. */
+  install?: { note: string; steps: string[] };
   /** Optional secondary links. */
   repo?: string;
   site?: string;

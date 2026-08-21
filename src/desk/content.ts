@@ -269,6 +269,7 @@ export const projects: Project[] = [
  *     platforms: ["Windows", "macOS"],
  *     size: "42 MB",
  *     href: "https://github.com/LodiAniez/my-apps/releases/download/Tag/app.exe",
+ *     install: { note: "Why it needs a workaround.", steps: ["Step one", "Step two"] },
  *     repo: "https://github.com/LodiAniez/app-name",
  *   }
  */
@@ -294,6 +295,15 @@ export const apps: DownloadableApp[] = [
     platforms: ["Android"],
     size: "90.7 MB",
     href: "https://github.com/LodiAniez/my-apps/releases/download/ExpenseNagger/app-release.apk",
+    install: {
+      note: "Android's Play Protect blocks apps from unverified developers, so it will refuse this one until you let it through.",
+      steps: [
+        "Play Store \u2192 your profile \u2192 Play Protect \u2192 \u2699\ufe0f",
+        'Turn off "Scan apps with Play Protect"',
+        "Open the downloaded .apk and install it",
+        "Turn Play Protect back on",
+      ],
+    },
   },
 ];
 

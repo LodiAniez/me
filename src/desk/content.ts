@@ -294,7 +294,7 @@ export const apps: DownloadableApp[] = [
     version: "1.0.0",
     platforms: ["Android"],
     size: "90.7 MB",
-    href: "https://github.com/LodiAniez/my-apps/releases/download/ExpenseNagger/app-release.apk",
+    href: "https://github.com/LodiAniez/my-apps/releases/download/ExpenseNagger/expense-nagger.apk",
     install: {
       note: "Android's Play Protect blocks apps from unverified developers, so it will refuse this one until you let it through.",
       steps: [
